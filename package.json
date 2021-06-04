@@ -3,11 +3,10 @@
   "version": "0.0.1",
   "description": "Learning project at Yandex Praktikum",
   "scripts": {
-    "start": "npm run build && npm run express",
+    "start": "parcel build static/*.hbs --no-cache && npm run express",
     "dev": "concurrently \"npm run express\" \"npm run watch\"",
     "express": "node ./server.js",
     "watch": "parcel watch static/*.hbs --no-cache",
-    "build": "parcel build static/*.hbs --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
