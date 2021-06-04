@@ -118,6 +118,14 @@ td.profile__table-cell {
   line-height: $field-line-height;
 }
 
+.profile__input[data-display="inline"] {
+  display: block;
+
+  @media (min-width: $profile-bp) {
+    display: inline-flex;
+  }
+}
+
 
 .profile__table-tfoot .profile__table-row:first-child {
   padding-top: 1rem;

@@ -31,10 +31,10 @@
                 <span class="profile__field">{{value}}</span>
               {{/is}}
               {{#is edit "data"}}
-                {{> input _ctx name=id id=id display="inline" theme="2" value=value hint=label}}
+                {{> input _ctx wrapperClass="profile__input" name=id id=id display="inline" theme="2" value=value hint=label}}
               {{/is}}
               {{#is edit "password"}}
-                {{> input _ctx name=id id=id display="inline" theme="2" value=value hint=label type="password"}}
+                {{> input _ctx wrapperClass="profile__input" name=id id=id display="inline" theme="2" value=value hint=label type="password"}}
               {{/is}}
             </td>
           </tr>
