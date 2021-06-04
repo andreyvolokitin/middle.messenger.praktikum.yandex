@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Learning project at Yandex Praktikum",
   "scripts": {
-    "start": "concurrently \"npm run express\" \"npm run watch\"",
+    "start": "concurrently \"node ./server.js\" \"parcel watch static/*.hbs --no-cache\"",
     "watch": "parcel watch static/*.hbs --no-cache",
     "express": "node ./server.js",
     "build": "parcel build static/*.hbs --no-cache",
