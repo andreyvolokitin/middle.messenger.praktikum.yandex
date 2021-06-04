@@ -1,0 +1,27 @@
+@use 'sass:math';
+@use 'sass:list';
+
+@function strip-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+@function get-field-border-y-height($border-width) {
+  $val: 0;
+
+  @if list.length($border-width) > 2 {
+    $val: list.nth($border-width, 1) + list.nth($border-width, 3);
+  } @else {
+    $val: list.nth($border-width, 1) * 2;
+  }
+
+  @if $val == 0 {
+    $val: #{$val}px;
+  }
+
+  @return $val;
+}
+
+@function get-field-height($line-height, $gap-y, $border-width) {
+  @return calc(#{$line-height + $gap-y * 2} - #{get-field-border-y-height($border-width)});
+}
+

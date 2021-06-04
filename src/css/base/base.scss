@@ -1,0 +1,111 @@
+@import '../../node_modules/html5-boilerplate/dist/css/normalize.css';
+@import '../../node_modules/html5-boilerplate/dist/css/main.css';
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  color: $text-color;
+}
+
+body {
+  background: $main-bg;
+}
+
+// https://css-tricks.com/webkit-html5-search-inputs/
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+// https://stackoverflow.com/questions/38663578/how-to-hide-autofill-safari-icon-in-input-field
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+}
+
+
+// Показ фокус-стилей только для `:focus-visible`
+a[href]:not([tabindex^="-"]):focus,
+area[href]:not([tabindex^="-"]):focus,
+input:not([type="hidden"]):not([type="radio"]):not([disabled]):not([tabindex^="-"]):focus,
+input[type="radio"]:not([disabled]):not([tabindex^="-"]):checked:focus,
+select:not([disabled]):not([tabindex^="-"]):focus,
+textarea:not([disabled]):not([tabindex^="-"]):focus,
+button:not([disabled]):not([tabindex^="-"]):focus,
+iframe:not([tabindex^="-"]):focus,
+audio[controls]:not([tabindex^="-"]):focus,
+video[controls]:not([tabindex^="-"]):focus,
+[contenteditable]:not([tabindex^="-"]):focus,
+[tabindex]:not([tabindex^="-"]):focus {
+  outline: 0;
+}
+
+a[href]:not([tabindex^="-"]):focus-visible,
+area[href]:not([tabindex^="-"]):focus-visible,
+input:not([type="hidden"]):not([type="radio"]):not([disabled]):not([tabindex^="-"]):focus-visible,
+input[type="radio"]:not([disabled]):not([tabindex^="-"]):checked:focus-visible,
+select:not([disabled]):not([tabindex^="-"]):focus-visible,
+textarea:not([disabled]):not([tabindex^="-"]):focus-visible,
+button:not([disabled]):not([tabindex^="-"]):focus-visible,
+iframe:not([tabindex^="-"]):focus-visible,
+audio[controls]:not([tabindex^="-"]):focus-visible,
+video[controls]:not([tabindex^="-"]):focus-visible,
+[contenteditable]:not([tabindex^="-"]):focus-visible,
+[tabindex]:not([tabindex^="-"]):focus-visible {
+  @include focus-ring;
+}
+
+
+// Сброс стилей списков
+.nolist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Сброс отступов
+.nomrg {
+  margin: 0 !important;
+}
+
+// Выравнивание текста
+.tac {
+  text-align: center;
+}
+
+// Размеры текста
+.fs-sm {
+  font-size: .8rem;
+}
+.fs-lg {
+  font-size: 1.2rem;
+}
+.fs-xl {
+  font-size: 1.5rem;
+}
+
+// Отступы снизу
+.gap-y-gen {
+  margin-bottom: #{$gap-y-generic};
+}
+.gap-y-xs {
+  margin-bottom: #{$gap-y-xs};
+}
+.gap-y-sm {
+  margin-bottom: #{$gap-y-sm};
+}
+.gap-y-lg {
+  margin-bottom: #{$gap-y-lg};
+}
+.gap-y-xl {
+  margin-bottom: #{$gap-y-xl};
+}
+[class*="gap-y-"]:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,21 @@
+$icon-base-scale: 1.46;
+
+.icon,
+.icon > * {
+  display: inline-block;
+}
+.icon > svg {
+  position: relative;
+  top: 0.066666667em;
+  width: 1em;
+  height: 1em;
+  vertical-align: baseline;
+  // svg иконок сделан так, что контент не примыкает к границам `viewBox`, скалирование это нивелирует
+  // альтернативно (и предпочтительней) можно использовать иконки с примыканием к границам `viewBox`
+  transform: scale(calc(#{1.46} * var(--scale)));
+}
+.icon > svg,
+.icon > svg path {
+  fill: currentColor;
+}
+

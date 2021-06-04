@@ -1,0 +1,8 @@
+$field-row-item-gap: .2rem;
+
+.field-row {
+  margin: -#{$field-row-item-gap};
+}
+.field-row__field {
+  margin: #{$field-row-item-gap};
+}

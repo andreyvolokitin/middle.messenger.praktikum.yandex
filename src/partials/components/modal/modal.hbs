@@ -1,0 +1,21 @@
+<div
+    class="{{class}} js-modal modal scrollbar"
+    id="{{id}}"
+    tabindex="-1"
+>
+  <div class="modal__inner">
+    <div class="modal__block">
+      <header class="modal__heading">
+        {{#> button
+            _ctx
+            class="js-modal__close modal__close"
+            icon="close.svg"
+            theme="1"
+            title="Закрыть"
+        }}{{! Пустой блок для обнуления @partal-block родителя: https://github.com/handlebars-lang/handlebars.js/issues/1535 }}{{/button}}
+        <h4 class="heading">{{heading}}</h4>
+      </header>
+      {{> @partial-block}}
+    </div>
+  </div>
+</div>

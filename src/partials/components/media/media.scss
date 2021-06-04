@@ -1,0 +1,19 @@
+.media {
+  display: inline-block;
+  max-width: 100%;
+  min-width: min(8rem, 100%);
+  border: 1px solid $ui-color;
+  vertical-align: top;
+}
+.media__content {
+  display: flex;
+  min-height: 8rem;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  background-color: $muted-color;
+}
+.media__item {
+  max-width: 100%;
+  height: auto;
+}

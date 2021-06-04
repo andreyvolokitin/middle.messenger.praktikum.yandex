@@ -1,0 +1,95 @@
+<div class="{{#isnt currentChat null}}js-chat{{/isnt}} chat">
+  {{#isnt currentChat null}}
+    <header class="chat__toolbar">
+      <div class="chat__toolbar-slot_nav chat__toolbar-slot">
+        {{> button
+            _ctx
+            theme="1"
+            icon="menu.svg"
+            attrs=(attr
+                onclick="document.querySelector('.messenger__sidebar').classList.remove('is-closed')"
+            )
+        }}
+      </div>
+      <div class="chat__toolbar-slot_main chat__toolbar-slot">
+        {{> chat-preview tag="div" picSize="3.25rem" compact=1 chatData=currentChat}}
+      </div>
+      <div class="chat__toolbar-slot_actions chat__toolbar-slot">
+        {{> button
+            _ctx
+            class="js-dropdown-toggle"
+            icon="kebab-vertical.svg"
+            theme="1"
+            title="Действия с чатом"
+            attrs=(attr
+                data-target="#chat-actions-dropdown"
+            )
+        }}
+      </div>
+
+    </header>
+    <div class="chat__messages scrollbar">
+      {{#each currentChat.messages as |messageData|}}
+        {{#with (itemAt ../currentChat.messages (minus @index 1))}}
+          {{#and (gt @index 0) (isnt (isSameDate this.date messageData.date) true)}}
+            </div>
+          {{/and}}
+          {{#or (eq @index 0) (isnt (isSameDate this.date messageData.date) true)}}
+            <div class="chat__messages-day">
+              <div class="chat__messages-day-header">
+                {{> time _ctx class="chat__messages-day-label" value="23 ноября"}}
+              </div>
+          {{/or}}
+        {{/with}}
+          {{> message class="chat__message" messageData=messageData}}
+      {{/each}}
+        </div>
+    </div>
+
+    <form class="js-chat__input-form chat__input" action="#">
+      <div class="chat__input-slot">
+        {{#> button
+            _ctx
+            tag="label"
+            class="focused-within"
+            tabindex="-1"
+            icon="paperclip.svg"
+            iconScale=1.5
+            theme="1"
+            title="Прикрепить любой файл"
+        }}
+          <input class="js-chat__attach-input sr-only" type="file" />
+        {{/button}}
+      </div>
+      <div class="chat__input-slot_field chat__input-slot">
+        {{> input
+            _ctx
+            area=1
+            fixed=1
+            theme="1"
+            class="js-chat__input-field chat__input-field"
+            name="message"
+            id="chat-input-field"
+            hint="Сообщение"
+            attrs=(attr
+                data-height-limit=150
+            )
+        }}
+      </div>
+      <div class="chat__input-slot">
+        {{> button
+            _ctx
+            icon="forward.svg"
+            iconScale=1.5
+            theme="2"
+            title="Отправить сообщение"
+            type="submit"
+        }}
+      </div>
+    </form>
+  {{else}}
+    <div class="chat__empty-msg">
+      Выберите чат, чтобы отправить сообщение
+    </div>
+  {{/isnt}}
+</div>

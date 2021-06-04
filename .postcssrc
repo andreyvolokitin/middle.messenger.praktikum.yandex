@@ -1,0 +1,9 @@
+{
+  plugins: {
+    'postcss-inline-svg': {
+      paths: ['./static/'],
+    },
+    'postcss-em-media-query': {},
+    autoprefixer: {},
+  },
+}

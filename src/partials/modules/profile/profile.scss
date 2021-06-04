@@ -1,0 +1,130 @@
+$profile-bp: 37.5 * $font-size-primary; // 600px при шрифте 16px
+.profile {
+  margin: $gap-y-lg auto;
+  max-width: 45rem;
+}
+.profile__head {
+  text-align: center;
+  margin-bottom: $gap-y-lg;
+}
+.profile__pic {
+  position: relative;
+  margin-bottom: $gap-y-generic;
+}
+.profile__pic::before,
+.profile__pic::after {
+  position: absolute;
+  display: none;
+}
+.profile__pic::before {
+  content: '';
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  z-index: $z-index-misc;
+  background-color: transparentize($dark-color, .3);
+  color: $light-color;
+  text-align: center;
+}
+.profile__pic::after {
+  content: attr(data-label);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  z-index: $z-index-misc + 1;
+  color: $light-color;
+  text-align: center;
+}
+.profile__pic:hover::before,
+.profile__pic:focus::before,
+.profile__pic:hover::after,
+.profile__pic:focus::after {
+  display: block;
+}
+
+.profile__table,
+.profile__table-body,
+.profile__table-tfoot,
+.profile__table-row {
+  display: block;
+}
+.profile__table-row {
+  border-bottom: 1px solid $ui-color;
+  text-align: justify;
+  white-space: normal;
+  word-spacing: 0;
+  letter-spacing: 0;
+  line-height: 0;
+  font-size: 0;
+}
+.profile__table-row:last-child {
+  border-bottom: none;
+}
+.profile__table-row::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  line-height: 0;
+}
+.profile__table-cell {
+  display: block;
+  vertical-align: baseline;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: 1rem;
+  line-height: $line-height-primary;
+
+  @include break-word;
+
+  @media (min-width: $profile-bp) {
+    display: inline-flex;
+  }
+}
+th.profile__table-cell {
+  font-weight: normal;
+
+  @media (min-width: $profile-bp) {
+    width: 45%;
+  }
+}
+td.profile__table-cell {
+  color: $muted-color
+}
+
+.profile__table-cell:last-child {
+  @media (min-width: $profile-bp) {
+    justify-content: flex-end;
+    text-align: right;
+    width: 53%;
+  }
+}
+.profile__table-cell:last-child input {
+  @media (min-width: $profile-bp) {
+    text-align: right;
+  }
+}
+
+.profile__field {
+  display: inline-block;
+  padding: $field-gap-y 0;
+  line-height: $field-line-height;
+}
+
+
+.profile__table-tfoot .profile__table-row:first-child {
+  padding-top: 1rem;
+}
+.profile__table-tfoot .profile__table-cell {
+  width: auto;
+  display: block;
+  text-align: left;
+}
+

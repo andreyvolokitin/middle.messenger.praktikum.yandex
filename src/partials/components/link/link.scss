@@ -1,0 +1,30 @@
+.link:link, .link:visited {
+  color: $brand-color;
+}
+// фокус-стили стилизуются отдельно
+.link:hover {
+  text-decoration: none;
+}
+
+.link_1:link, .link_1:visited {
+  text-decoration: none;
+  font-weight: bold;
+}
+.link_1:hover {
+  text-decoration: underline;
+}
+
+// увеличить тач-зону
+.link_action {
+  position: relative;
+  z-index: 0;
+}
+.link_action::after {
+  content: '';
+  position: absolute;
+  left: -.5em;
+  right: -.5em;
+  top: -.7em;
+  bottom: -.7em;
+  z-index: -1;
+}

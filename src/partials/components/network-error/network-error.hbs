@@ -1,0 +1,15 @@
+{{!
+  Всегда следует добавлять атрибут `_ctx` как первый аргумент при вызове — это сотрёт родительский контекст,
+  и позволит использовать локально любые переменные, не боясь пересечения с глобальными.
+  https://github.com/handlebars-lang/handlebars.js/issues/1032
+  https://github.com/handlebars-lang/handlebars.js/issues/1550
+
+  Если есть непустой локальный контекст, можно использовать его вместо `_ctx`
+}}
+<div class="network-error">
+  <div class="network-error__type">{{type}}</div>
+  <div class="network-error__clarification">{{clarification}}</div>
+  <div class="network-error__recover">
+    {{> button _ctx tag="a" href=recoverURL theme="4" text="Перейти назад"}}
+  </div>
+</div>

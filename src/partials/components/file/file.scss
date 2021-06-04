@@ -1,0 +1,22 @@
+$file-badge-size: 2em * $line-height-primary;
+$file-badge-gap: .6em;
+.file {
+  position: relative;
+  padding-left: calc(#{$file-badge-size} + #{$file-badge-gap});
+}
+.file::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  width: $file-badge-size;
+  height: $file-badge-size;
+  background-color: $brand-color;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;;
+  background-size: 60%;
+}
+.file[data-type="default"]::before {
+  background-image: svg-load('assets/img/file.svg', fill=$white);
+}

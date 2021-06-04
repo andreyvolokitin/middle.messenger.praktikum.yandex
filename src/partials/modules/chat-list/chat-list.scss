@@ -1,0 +1,6 @@
+.chat-list__list-item {
+  border-bottom: 1px solid $ui-color;
+}
+.chat-list__list-item:last-child {
+  border-bottom: none;
+}
