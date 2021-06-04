@@ -1,6 +1,6 @@
 {
   "extends": ["@parcel/config-default"],
   "transformers": {
-    "*.hbs": ["@my-test-namespace/parcel-transformer-handlebars"],
+    "*.hbs": ["parcel-transformer-handlebars"],
   },
 }
