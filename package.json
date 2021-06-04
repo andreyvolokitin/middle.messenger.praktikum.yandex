@@ -24,12 +24,12 @@
   ],
   "homepage": "https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@andreyvolokitin/parcel-transformer-handlebars": "^0.0.1",
     "@parcel/transformer-sass": "^2.0.0-beta.3.1",
     "autoprefixer": "^10.2.6",
     "concurrently": "^6.1.0",
     "express": "^4.17.1",
     "parcel": "^2.0.0-beta.3.1",
-    "parcel-transformer-handlebars": "github:andreyvolokitin/parcel-transformer-handlebars",
     "postcss": "^8.3.0",
     "postcss-em-media-query": "^4.1.0",
     "postcss-inline-svg": "^5.0.0"
