@@ -1,0 +1,18 @@
+{{!
+  Всегда следует добавлять атрибут `_ctx` как первый аргумент при вызове — это сотрёт родительский контекст,
+  и позволит использовать локально любые переменные, не боясь пересечения с глобальными.
+  https://github.com/handlebars-lang/handlebars.js/issues/1032
+  https://github.com/handlebars-lang/handlebars.js/issues/1550
+
+  Если есть непустой локальный контекст, можно использовать его вместо `_ctx`
+}}
+<{{default tag "div"}}
+  class="{{class}} file"
+  {{#is tag "a"}}
+    href="{{default url "#"}}"
+  {{/is}}
+  data-type="{{default type "default"}}"
+>
+  <div class="file__name">{{append (stem url) (extname url)}}</div>
+  <div class="file__size">{{bytes size}}</div>
+</{{default tag "div"}}>

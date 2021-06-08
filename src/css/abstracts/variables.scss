@@ -1,0 +1,59 @@
+// Шрифты
+$text-font-stack: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-size-primary: 1em;
+$line-height-primary: 1.4;
+
+// Цвета (нельзя использовать ключевые слова типа "white")
+$black: #1E1E1E;
+$grey: #999999;
+$grey-light: #EAEAEA;
+$white: #FFFFFF;
+$blue: #3369F3;
+$red: #FF2F2F;
+
+$brand-color: $blue;
+$brand-color-light: lighten(desaturate(adjust-hue($brand-color, -5), 2.68), 36.67);
+$text-color: $black;
+$muted-color: $grey;
+$error-color: $red;
+$danger-color: $red;
+$ui-color: $grey-light;
+$ui-color-light: lighten($ui-color, 5);
+
+$dark-color: $black;
+$light-color: $white;
+
+
+$main-bg: $white;
+
+// Длительность css-переходов
+$transition-duration: .15s;
+
+// Уровни наложения
+$z-index-primary: 0; // макс. 1999
+$z-index-dropdown: 2000; // макс. 2999
+$z-index-navigation: 3000; // макс. 3999
+$z-index-secondary: 4000; // макс. 4999
+$z-index-misc: 5000; // макс. 7999
+$z-index-modal: 8000; // макс. 8999
+$z-index-notification: 9000; // макс. 9999
+
+// Брейкпоинты
+$narrow-screen-bp: 50 * $font-size-primary; // 800px при шрифте 16px
+
+// Кросс-компонентные переменные
+$section-pad-generic: .65rem;
+$gap-x-generic: $section-pad-generic;
+$gap-x-generic-lg: $gap-x-generic * 1.5;
+$gap-y-generic: 1.5rem;
+$gap-y-xs: $gap-y-generic * .2;
+$gap-y-sm: $gap-y-generic * .5;
+$gap-y-lg: $gap-y-generic * 1.5;
+$gap-y-xl: $gap-y-generic * 2;
+:root {
+  --section-pad-x-generic: #{$gap-x-generic};
+
+  @media (min-width: $narrow-screen-bp) {
+    --section-pad-x-generic: #{$gap-x-generic-lg};
+  }
+}

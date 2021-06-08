@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>{{title}}</title>
+  <meta name="description" content="" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../src/css/main.scss">
+</head>
+<body>
+  <div class="{{#if backURL}}page_inner{{/if}} {{#if centered}}page_centered{{/if}} {{#if scroll}}page_scroll{{/if}} page">
+    {{#if backURL}}
+      <a href="{{backURL}}" tabindex="-1" title="Назад" class="page__back">
+        <object type="no/suchtype">
+          {{#> button _ctx class="page__back-decoration" tag="a" href=backURL icon="back.svg" iconScale=1.5 theme="2" }}
+            {{! Пустой блок для обнуления @partal-block родителя: https://github.com/handlebars-lang/handlebars.js/issues/1535 }}
+          {{/button}}
+        </object>
+      </a>
+    {{/if}}
+    {{#if centered}}
+      <div class="page__centerer page__content">
+        {{> @partial-block}}
+      </div>
+    {{else}}
+      {{#if backURL}}
+        <div class="page__content">
+          {{> @partial-block}}
+        </div>
+      {{else}}
+        {{> @partial-block}}
+      {{/if}}
+    {{/if}}
+  </div>
+  <script src="../src/index.js"></script>
+</body>
+</html>

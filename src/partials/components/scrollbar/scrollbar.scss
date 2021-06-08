@@ -1,0 +1,37 @@
+// `scrollbar-width: thin` = 10px (с зазорами в ~2px по бокам)
+$scrollbar-size: 10px;
+$scrollbar-gap: 2px;
+$scrollbar-track-color: transparent;
+//$scrollbar-track-color: transparentize($ui-color, .5);
+$scrollbar-thumb-color: $muted-color;
+
+html,
+textarea,
+.scrollbar {
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+  scrollbar-width: thin;
+}
+html::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar {
+  width: $scrollbar-size;
+  height: $scrollbar-size;
+}
+html::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb {
+  background: $scrollbar-thumb-color;
+  border-radius: $scrollbar-size;
+  border: $scrollbar-gap solid transparent;
+  background-clip: content-box;
+}
+html::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track {
+  background: $scrollbar-track-color;
+}
+
+.scrollbar {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

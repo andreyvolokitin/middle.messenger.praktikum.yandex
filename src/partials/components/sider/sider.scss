@@ -1,0 +1,14 @@
+.sider {
+  display: flex;
+}
+.sider__side,
+.sider__main {
+  @include break-word;
+}
+.sider__side {
+  flex-basis: 0;
+  margin-right: 1rem;
+}
+.sider__main {
+  flex-grow: 1;
+}

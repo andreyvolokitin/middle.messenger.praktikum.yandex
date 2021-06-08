@@ -1,0 +1,107 @@
+<div class="profile">
+  <header class="profile__head">
+    {{> avatar
+        _ctx
+        tag="a"
+        class="js-modal-trigger profile__pic"
+        size="10rem"
+        theme="1"
+        url=user.pic
+        attrs=(attr
+            data-target="#upload-avatar-modal"
+            data-label="Поменять аватар"
+        )
+    }}
+    <h4 class="profile__name heading">{{user.first_name}}</h4>
+  </header>
+  <div class="profile__content">
+    <table class="profile__table">
+      <tbody class="profile__table-body">
+        {{#*inline "profile-table-row"}}
+          <tr class="profile__table-row">
+            <th class="profile__table-cell">
+              {{#isnt edit null}}
+                <label for="{{id}}" class="profile__field">{{label}}</label>
+              {{else}}
+                <span class="profile__field">{{label}}</span>
+              {{/isnt}}
+            </th>
+            <td class="profile__table-cell">
+              {{#is edit null}}
+                <span class="profile__field">{{value}}</span>
+              {{/is}}
+              {{#is edit "data"}}
+                {{> input _ctx wrapperClass="profile__input" name=id id=id display="inline" theme="2" value=value hint=label}}
+              {{/is}}
+              {{#is edit "password"}}
+                {{> input _ctx wrapperClass="profile__input" name=id id=id display="inline" theme="2" value=value hint=label type="password"}}
+              {{/is}}
+            </td>
+          </tr>
+        {{/inline}}
+        {{#or (is edit null) (is edit "data")}}
+          {{> profile-table-row label="Почта" value=user.email id="email"}}
+          {{> profile-table-row label="Логин" value=user.login id="login"}}
+          {{> profile-table-row label="Имя" value=user.first_name id="first_name"}}
+          {{> profile-table-row label="Фамилия" value=user.last_name id="last_name"}}
+          {{> profile-table-row label="Имя в чате" value=user.nickname id="nickname"}}
+          {{! todo: использовать хэлпер для форматирования номера телефона}}
+          {{> profile-table-row label="Телефон" value="+7 (777) 777 77 77" id="phone"}}
+        {{/or}}
+        {{#is edit "password"}}
+          {{> profile-table-row label="Старый пароль" value=user.password id="password-old"}}
+          {{> profile-table-row label="Новый пароль" id="password-new"}}
+          {{> profile-table-row label="Повторите новый пароль" id="password-new-repeat"}}
+        {{/is}}
+      </tbody>
+      <tfoot class="profile__table-tfoot">
+        {{#is edit null}}
+          <tr class="profile__table-row">
+            <td colspan="2" class="profile__table-cell">
+              {{> button
+                  _ctx
+                  tag="a"
+                  theme="5"
+                  href="user-info_edit.hbs"
+                  text="Изменить данные"
+              }}
+            </td>
+          </tr>
+          <tr class="profile__table-row">
+            <td colspan="2" class="profile__table-cell">
+              {{> button
+                  _ctx
+                  tag="a"
+                  theme="5"
+                  href="user-info_change-password.hbs"
+                  text="Изменить пароль"
+              }}
+            </td>
+          </tr>
+          <tr class="profile__table-row">
+            <td colspan="2" class="profile__table-cell">
+              {{> button
+                  _ctx
+                  tag="a"
+                  theme="6"
+                  href="index.hbs"
+                  text="Выйти"
+              }}
+            </td>
+          </tr>
+        {{else}}
+          <tr class="profile__table-row">
+            <td colspan="2" class="profile__table-cell">
+              {{> button _ctx type="submit" text="Сохранить"}}
+            </td>
+          </tr>
+        {{/is}}
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+{{#> modal id="upload-avatar-modal" heading="Загрузка аватара"}}
+  {{> upload-avatar}}
+{{/modal}}
+

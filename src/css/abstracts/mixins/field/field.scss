@@ -1,0 +1,49 @@
+@use 'sass:list';
+
+// Общие стили полей форм (инпут/селект)
+$field-gap-x: 0;
+$field-gap-y: 1em;
+$field-font-size: 1rem;
+$field-line-height: 1.3;
+$field-border-width: 0 0 1px;
+$field-height: get-field-height($field-line-height, $field-gap-y, $field-border-width);
+$field-placeholder-color: $muted-color;
+$field-bg-color: transparent;
+@mixin field-base {
+  padding: $field-gap-y $field-gap-x;
+  height: $field-height;
+  line-height: $field-line-height;
+  border-width: $field-border-width;
+  font-size: $field-font-size;
+}
+@mixin field-skin {
+  border-style: solid;
+  border-color: $brand-color;
+  background-color: $field-bg-color;
+  color: $text-color;
+}
+@mixin field_invalid {}
+
+
+// Модификации
+$field-gap-x_1: 1.5em;
+$field-bg-color_1: $ui-color;
+@mixin field-base_1 {
+  padding-left: $field-gap-x_1;
+  padding-right: $field-gap-x_1;
+  --field-height: #{$field-height};
+  border-radius: calc(var(--field-height) / 2);
+}
+@mixin field-skin_1 {
+  background-color: $field-bg-color_1;
+  border-color: transparent;
+}
+
+$field-border-width_2: 0;
+@mixin field-base_2 {
+  border-width: $field-border-width_2;
+}
+@mixin field-skin_2 {
+  color: $muted-color;
+}
+

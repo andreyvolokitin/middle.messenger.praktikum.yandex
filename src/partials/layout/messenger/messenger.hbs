@@ -1,0 +1,40 @@
+<main class="messenger">
+  <div tabindex="-1" class="{{#isnt currentChat null}}is-closed{{/isnt}} messenger__sidebar">
+    <header class="messenger__sidebar-head">
+      <div class="messenger__sidebar-actions">
+        {{#isnt currentChat null}}
+          {{> button
+              _ctx
+              class="messenger__sidebar-close"
+              icon="close.svg"
+              theme="1"
+              title="Hide sidebar"
+              attrs=(attr
+                  onclick="this.closest('.messenger__sidebar').classList.add('is-closed')"
+              )
+          }}
+        {{/isnt}}
+        {{> button _ctx tag="a" href="./user-info.hbs" icon="user.svg" theme="1" title="Ваш профиль"}}
+      </div>
+      <div class="messenger__sidebar-search">
+        <form class="js-chat-list__search-form" action="#">
+          {{> input
+              _ctx
+              class="js-chat-list__search"
+              type="search"
+              name="chat-list-search"
+              id="chat-list-search"
+              hint="Поиск"
+              theme="1"
+          }}
+        </form>
+      </div>
+    </header>
+    <div class="messenger__sidebar-body scrollbar">
+      {{> chat-list currentChat=currentChat}}
+    </div>
+  </div>
+  <div class="messenger__chat">
+    {{> chat currentChat=currentChat}}
+  </div>
+</main>

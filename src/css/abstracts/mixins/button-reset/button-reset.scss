@@ -1,0 +1,15 @@
+@mixin button-reset {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  border: none;
+  position: relative;
+  overflow: visible;
+  background: none;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  @include non-selectable;
+}

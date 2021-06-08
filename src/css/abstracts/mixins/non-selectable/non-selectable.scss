@@ -1,0 +1,4 @@
+@mixin non-selectable {
+  -webkit-touch-callout: none;
+  user-select: none;
+}

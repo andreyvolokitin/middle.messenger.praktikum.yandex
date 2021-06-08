@@ -1,0 +1,9 @@
+@mixin only-ff($selector, $map){
+  @-moz-document url-prefix() {
+    #{$selector} {
+      @each $property, $value in ($map) {
+        #{$property}: $value;
+      }
+    }
+  }
+}

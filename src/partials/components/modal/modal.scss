@@ -1,0 +1,37 @@
+$modal-close-btn-shift: .5em;
+.modal {
+  position: fixed;
+  z-index: $z-index-modal;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+  background-color: transparentize($dark-color, .2);
+}
+.modal.is-visible {
+  display: block;
+}
+.modal__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+.modal__block {
+  @include beauty-block;
+  @include pop-block;
+
+  margin: 1.25rem #{$gap-x-generic};
+  max-width: calc(100% - #{$gap-x-generic} * 2);
+}
+
+.modal__heading {
+  display: flow-root;
+}
+.modal__close {
+  float: right;
+  margin: -#{$modal-close-btn-shift} -#{$modal-close-btn-shift} 0 1em;
+}

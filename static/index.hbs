@@ -1,0 +1,21 @@
+{{#> page centered=1 scroll=1 title="Вход"}}
+  {{#> auth heading="Вход"}}
+    <div class="gap-y-xl">
+      <div class="gap-y-sm">
+        {{> input _ctx wrapperClass="has-error" value="wrong" name="login" id="login" hint="Логин" autocomplete="username" float=1}}
+      </div>
+      <div class="gap-y-sm">
+        {{> input _ctx name="password" id="password" hint="Пароль" type="password" autocomplete="current-password" float=1}}
+      </div>
+    </div>
+    <div class="gap-y-xs">
+      {{> button _ctx tag="a" href="./chat-initial.hbs" display="block" text="Авторизоваться"}}
+    </div>
+    <div class="gap-y-xs">
+      {{> button _ctx tag="a" href="./signup.hbs" display="block" theme="4" text="Нет аккаунта?"}}
+    </div>
+    <div class="gap-y-xs">
+      {{> button _ctx class="js-auth__test-feature" display="block" theme="4" text="Кликни и см. консоль"}}
+    </div>
+  {{/auth}}
+{{/page}}

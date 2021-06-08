@@ -1,0 +1,50 @@
+@use 'sass:math';
+
+$avatar-default-width: 6.25rem;
+$avatar-default-height: 6.25rem;
+
+.avatar,
+.avatar__pic {
+  max-width: 100%;
+}
+.avatar {
+  display: inline-block;
+  width: $avatar-default-width;
+  margin: 0;
+  vertical-align: top;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.avatar__pic {
+  position: relative;
+  height: 0;
+  padding-top: #{math.percentage(math.div($avatar-default-height, $avatar-default-width))};
+  background: $ui-color;
+  background-size: cover;
+
+  @include at2x {
+    background-image: var(--at2x) !important;
+  }
+}
+.avatar__img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+
+// Модификации
+.avatar_1 > .avatar__pic:not([data-populated])::after {
+  content: '';
+  position: absolute;
+  z-index: $z-index-primary;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: svg-load('assets/img/image.svg', fill=$muted-color) no-repeat 50% 50%;
+  background-size: 40%;
+}
