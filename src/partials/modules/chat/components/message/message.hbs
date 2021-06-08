@@ -1,6 +1,6 @@
 {{#with messageData}}
   <article
-      class="{{class}} {{#is text null}}message_no-text{{/is}} {{#if self}}message_self{{/if}} message"
+      class="{{../class}} {{#is text null}}message_no-text{{/is}} {{#if self}}message_self{{/if}} message"
       {{#if attach}}
         data-attach="{{attach.type}}"
       {{/if}}
