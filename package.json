@@ -6,7 +6,10 @@
     "start": "concurrently \"npm run express\" \"parcel watch static/*.hbs --no-cache\"",
     "watch": "parcel watch static/*.hbs --no-cache",
     "express": "node ./server.js",
-    "build": "parcel build static/*.hbs --no-cache",
+    "build": "npm run lint && parcel build static/*.hbs --no-cache",
+    "lint:css": "node_modules/.bin/stylelint \"**/*.scss\" --fix",
+    "lint:js": "node_modules/.bin/eslint . --fix",
+    "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,11 +31,20 @@
     "@parcel/transformer-sass": "^2.0.0-beta.3.1",
     "autoprefixer": "^10.2.6",
     "concurrently": "^6.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
     "express": "^4.17.1",
     "parcel": "^2.0.0-beta.3.1",
     "postcss": "^8.3.0",
     "postcss-em-media-query": "^4.1.0",
-    "postcss-inline-svg": "^5.0.0"
+    "postcss-inline-svg": "^5.0.0",
+    "prettier": "^2.3.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0"
   },
   "engines": {
     "node": ">=12.0.0"

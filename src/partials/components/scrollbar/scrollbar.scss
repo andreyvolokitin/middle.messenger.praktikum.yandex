@@ -5,6 +5,11 @@ $scrollbar-track-color: transparent;
 //$scrollbar-track-color: transparentize($ui-color, .5);
 $scrollbar-thumb-color: $muted-color;
 
+.scrollbar {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 html,
 textarea,
 .scrollbar {
@@ -29,9 +34,4 @@ html::-webkit-scrollbar-track,
 textarea::-webkit-scrollbar-track,
 .scrollbar::-webkit-scrollbar-track {
   background: $scrollbar-track-color;
-}
-
-.scrollbar {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }

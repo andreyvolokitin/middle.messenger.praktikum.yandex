@@ -1,10 +1,12 @@
 /*
-* todo: заменить на нормальный компонент
-* */
+ * todo: заменить на нормальный компонент
+ * */
 
-import debounce from "../../../utils/debounce";
+import debounce from '../../../utils/debounce';
 
 const VISIBLE_CLASS = 'is-visible';
+
+const dropdowns = new WeakMap();
 
 function toggleDropdown(dropdown, force) {
   if (!dropdown) {
@@ -14,16 +16,18 @@ function toggleDropdown(dropdown, force) {
   const toggle = dropdowns.get(dropdown);
   const isOpened = dropdown.classList.toggle(VISIBLE_CLASS, force);
 
-  toggle && toggle.classList.toggle('is-active', force);
-  isOpened && dropdown.focus();
+  if (toggle) {
+    toggle.classList.toggle('is-active', force);
+  }
+  if (isOpened) {
+    dropdown.focus();
+  }
 }
 function hideAllDropdowns() {
   document.querySelectorAll(`.js-dropdown.${VISIBLE_CLASS}`).forEach((dropdown) => {
     toggleDropdown(dropdown, false);
   });
 }
-
-const dropdowns = new WeakMap();
 
 document.addEventListener('click', (e) => {
   const dropdownToggle = e.target.closest('.js-dropdown-toggle');

@@ -1,6 +1,6 @@
 /*
-* todo: заменить на нормальный компонент
-* */
+ * todo: заменить на нормальный компонент
+ * */
 
 const MODAL_CLASS = 'js-modal';
 const VISIBLE_CLASS = 'is-visible';
@@ -12,14 +12,15 @@ function toggleModal(modal, force) {
 
   const isOpened = modal.classList.toggle(VISIBLE_CLASS, force);
 
-  isOpened && modal.focus();
+  if (isOpened) {
+    modal.focus();
+  }
 }
 function hideAllModals() {
   document.querySelectorAll(`.${MODAL_CLASS}.${VISIBLE_CLASS}`).forEach((modal) => {
     toggleModal(modal, false);
   });
 }
-
 
 document.addEventListener('click', (e) => {
   const modalTrigger = e.target.closest('.js-modal-trigger');

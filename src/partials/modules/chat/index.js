@@ -1,1 +1,3 @@
-export default from './chat.js';
+import Chat from './chat';
+
+export default Chat;

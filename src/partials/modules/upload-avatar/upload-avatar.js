@@ -1,6 +1,6 @@
 /*
-* todo: заменить на нормальный компонент
-* */
+ * todo: заменить на нормальный компонент
+ * */
 
 const UPLOADING_CLASS = 'is-uploading';
 const UPLOADED_CLASS = 'is-uploaded';
@@ -12,12 +12,13 @@ if (uploadAvatar) {
   const uploadAvatarFile = uploadAvatar.querySelector('.js-upload-avatar__file');
   const uploadAvatarProgress = uploadAvatar.querySelector('.js-upload-avatar__progress');
 
+  // eslint-disable-next-line no-inner-declarations
   function renderProgress(progress) {
     uploadAvatarProgress.value = progress;
 
     if (progress < 1) {
       requestAnimationFrame(() => {
-        renderProgress(progress + .01);
+        renderProgress(progress + 0.01);
       });
     } else {
       uploadAvatar.classList.add(UPLOADED_CLASS);

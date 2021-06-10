@@ -26,23 +26,6 @@ $message-avatar-gap: .4em;
   border-radius: $message-border-radius;
   background-color: $message-content-bg;
 }
-.message[data-attach] > .message__content {
-  min-width: min(#{$message-attach-min-width}, 100%);
-}
-.message[data-attach] > .message__avatar + .message__content {
-  min-width: min(#{$message-attach-min-width}, calc(100% - #{$message-avatar-width} - #{$message-avatar-gap}));
-}
-.message[data-attach="file"] > .message__content {
-  max-width: $message-file-max-width;
-}
-.message:not(.message_self, .message_no-text[data-attach="media"]) > .message__content,
-.message:not(.message_self) .message__attach[data-type="file"] {
-  border-bottom-left-radius: 0;
-}
-.message_self:not(.message_no-text[data-attach="media"]) > .message__content,
-.message_self .message__attach[data-type="file"] {
-  border-bottom-right-radius: 0;
-}
 .message_self  > .message__content {
   margin-left: auto;
   background-color: $message-self-content-bg;
@@ -50,12 +33,29 @@ $message-avatar-gap: .4em;
 .message_no-text > .message__content {
   padding-bottom: 0;
 }
+.message:not(.message_self, .message_no-text[data-attach="media"]) > .message__content,
+.message:not(.message_self) .message__attach[data-type="file"] {
+  border-bottom-left-radius: 0;
+}
+.message[data-attach] > .message__content {
+  min-width: min(#{$message-attach-min-width}, 100%);
+}
+.message[data-attach="file"] > .message__content {
+  max-width: $message-file-max-width;
+}
+.message[data-attach] > .message__avatar + .message__content {
+  min-width: min(#{$message-attach-min-width}, calc(100% - #{$message-avatar-width} - #{$message-avatar-gap}));
+}
+
+/* stylelint-disable no-descending-specificity */
+.message_self:not(.message_no-text[data-attach="media"]) > .message__content,
+.message_self .message__attach[data-type="file"] {
+  border-bottom-right-radius: 0;
+}
+/* stylelint-enable */
 
 .message__username {
   margin-bottom: .3em;
-}
-.message__username + .message__attach[data-type="media"] {
-  margin-top: .5em;
 }
 .message__avatar {
   flex-shrink: 0;
@@ -79,6 +79,9 @@ $message-avatar-gap: .4em;
 }
 .message_no-text .message__attach[data-type="media"] {
   margin-bottom: 0;
+}
+.message__username + .message__attach[data-type="media"] {
+  margin-top: .5em;
 }
 .message_no-text .message__attach {
   border-bottom-left-radius: $message-border-radius;
@@ -105,15 +108,15 @@ $message-meta-shift: -.15em;
   bottom: $message-meta-shift;
   pointer-events: none;
 }
-.message_self .message__meta:not([data-attach="media"]),
-.message_self .message__time:not([data-attach="media"]) {
-  color: $brand-color;
-}
 .message_no-text .message__meta {
   position: absolute;
   right: $message-pad;
   bottom: $message-pad + $message-meta-shift;
   z-index: $z-index-primary + 1;
+}
+.message_self .message__meta:not([data-attach="media"]),
+.message_self .message__time:not([data-attach="media"]) {
+  color: $brand-color;
 }
 .message_no-text:not([data-attach="file"]) .message__meta {
   @include pill(transparentize($dark-color, .3));
@@ -136,16 +139,16 @@ $message-meta-shift: -.15em;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.message__status[data-seen=false] {
+.message__status[data-seen="false"] {
   background-image: svg-load('assets/img/check.svg', fill=$brand-color);
 }
-.message__status[data-seen=true] {
+.message__status[data-seen="true"] {
   background-image: svg-load('assets/img/double-check.svg', fill=$brand-color);
 }
-.message_self.message_no-text[data-attach="media"] .message__status[data-seen=false] {
+.message_self.message_no-text[data-attach="media"] .message__status[data-seen="false"] {
   background-image: svg-load('assets/img/check.svg', fill=$light-color);
 }
-.message_self.message_no-text[data-attach="media"] .message__status[data-seen=true] {
+.message_self.message_no-text[data-attach="media"] .message__status[data-seen="true"] {
   background-image: svg-load('assets/img/double-check.svg', fill=$light-color);
 }
 

@@ -6,16 +6,12 @@ const ZERO_WIDTH_SPACE = '\u200B';
 const PARENT_CLONE_CLASSNAME = 'is-clone';
 const OVERFLOWN_TEXTAREA_CLASSNAME = 'is-overflown';
 
-function setCloneText(clone, text) {
-  clone.innerText = text;
-}
-
 class Chat {
   constructor(chatElem) {
     if (!chatElem) {
       return;
     }
-    
+
     this._chat = chatElem;
     this._form = this._chat.querySelector('.js-chat__input-form');
     this._textarea = this._chat.querySelector('.js-chat__input-field');
@@ -26,12 +22,14 @@ class Chat {
     this._heightLimit = this._textarea.dataset.heightLimit;
 
     /*
-    * - клонируем обёртку с `textarea`, чтобы сохранить нужные стили;
-    * - меняем в клоне тег с "textarea" на "div[contenteditable=true]" (по размеру клона мы будем выставлять размер `textarea`);
-    * - добавляем клон рядом с оригиналом, чтобы он имел такую же ширину
-    * */
+     * - клонируем обёртку с `textarea`, чтобы сохранить нужные стили;
+     * - меняем в клоне тег с "textarea" на "div[contenteditable=true]" (по размеру клона мы будем выставлять размер `textarea`);
+     * - добавляем клон рядом с оригиналом, чтобы он имел такую же ширину
+     * */
     this._parentClone.classList.add(PARENT_CLONE_CLASSNAME);
-    [...this._textareaClone.attributes].forEach((attr) => this._div.setAttribute(attr.name, attr.value));
+    [...this._textareaClone.attributes].forEach((attr) =>
+      this._div.setAttribute(attr.name, attr.value)
+    );
     this._div.contentEditable = true;
     this._textarea.insertAdjacentElement('afterend', this._parentClone);
     this._textareaClone.replaceWith(this._div);
@@ -82,7 +80,7 @@ class Chat {
    * @param enteredValue - текущий введённый символ
    */
   handleTextareaSizing(finalValue, enteredValue) {
-    setCloneText(this._div, finalValue);
+    this._div.innerText = finalValue;
 
     // contenteditable не реагирует на вводимый при нажатии enter символ, добавка "zero-width space" это исправляет
     if (enteredValue === null) {

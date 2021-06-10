@@ -6,4 +6,5 @@ import './partials/modules/upload-avatar';
 import './partials/components/dropdown';
 import './partials/components/modal';
 
+// eslint-disable-next-line no-unused-vars
 const chat = new Chat(document.querySelector('.js-chat'));

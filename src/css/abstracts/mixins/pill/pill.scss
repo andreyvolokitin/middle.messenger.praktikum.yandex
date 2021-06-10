@@ -12,6 +12,7 @@ $pill-size: #{$line-height-primary * 1em + $pill-gap-y * 2};
   @if $color != false {
     color: $color;
   }
+
   border-radius: 1em;
 
   @include only-ff('&', (

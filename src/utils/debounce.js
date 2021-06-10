@@ -13,6 +13,7 @@ function debounce(ms, fn, isImmediate) {
 
   return () => {
     const that = this;
+    // eslint-disable-next-line prefer-rest-params
     const args = arguments;
 
     if (timeout) {
@@ -23,10 +24,13 @@ function debounce(ms, fn, isImmediate) {
     }
 
     timeout = setTimeout(() => {
-      !isImmediate && fn.apply(that, args);
+      if (!isImmediate) {
+        fn.apply(that, args);
+      }
+
       timeout = undefined;
     }, ms);
-  }
+  };
 }
 
 export default debounce;

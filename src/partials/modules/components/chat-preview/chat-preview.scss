@@ -21,10 +21,6 @@ a.chat-preview:hover,
 .chat-preview_compact .chat-preview__content {
   align-self: center;
 }
-// `body` — для переопределения стилей заголовков (`h5.heading`)
-body .chat-preview__head {
-  margin-bottom: 0;
-}
 
 .chat-preview__head,
 .chat-preview__txt {
@@ -35,6 +31,10 @@ body .chat-preview__head {
 }
 .chat-preview__head {
   -webkit-line-clamp: 1;
+}
+// `body` — для переопределения стилей заголовков (`h5.heading`)
+body .chat-preview__head {
+  margin-bottom: 0;
 }
 .chat-preview_compact .chat-preview__head {
   @include break-word;
@@ -47,6 +47,7 @@ body .chat-preview__head {
   min-height: $line-height-primary * 2em; // всегда держать высоту блока одинаковой
   -webkit-line-clamp: 2;
 }
+
 
 .chat-preview__content-row {
   display: flex;

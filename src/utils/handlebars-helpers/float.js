@@ -1,4 +1,4 @@
-function float(val, options) {
+function float(val) {
   if (arguments.length !== 2) {
     throw new Error('Передайте одно значение');
   }
