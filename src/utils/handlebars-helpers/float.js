@@ -1,4 +1,5 @@
-function float(val) {
+/* eslint-disable */
+function float(val/*: string*/) {
   if (arguments.length !== 2) {
     throw new Error('Передайте одно значение');
   }

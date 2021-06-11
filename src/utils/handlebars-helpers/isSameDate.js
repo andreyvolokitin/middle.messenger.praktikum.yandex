@@ -1,9 +1,10 @@
+/* eslint-disable */
 /**
  * Форматировать дату в виде строки в фомате ISO 8601 (ГГГГ-ММ-ДД)
- * @param date - дата в виде, валидном для передачи в `new Date()`
+ * @param date - инстанс `new Date()`
  * @returns {string} - форматированная дата
  */
-function dateToISO8601(date) {
+function dateToISO8601(date/*: Date*/) {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 }
 
@@ -12,18 +13,17 @@ function dateToISO8601(date) {
  * @param date - инстанс `new Date()`
  * @returns {boolean|boolean}
  */
-function isValidDate(date) {
-  return date instanceof Date && !Number.isNaN(+date);
+function isValidDate(date/*: Date*/) {
+  return !Number.isNaN(+date);
 }
 
 /**
  * Handlebars helper. Выяснить, равны ли две даты (время не учитывается)
- * @param a
- * @param b
- * @param options
+ * @param a - дата в виде, валидном для передачи в `new Date()`
+ * @param b - дата в виде, валидном для передачи в `new Date()`
  * @returns {boolean}
  */
-function isSameDate(a, b) {
+function isSameDate(a/*: number | string*/, b/*: number | string*/) {
   if (arguments.length !== 3) {
     throw new Error('Передайте 2 даты');
   }
