@@ -64,7 +64,6 @@ module.exports = {
         'no-unexpected-multiline': 'error',
       },
       plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
-      // https://stackoverflow.com/questions/58510287/parseroptions-project-has-been-set-for-typescript-eslint-parser
     },
   ],
 };
