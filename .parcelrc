@@ -1,10 +1,10 @@
 {
-  "extends": ["@parcel/config-default"],
+  "extends": "@parcel/config-default",
   "transformers": {
     "*.hbs": ["@andreyvolokitin/parcel-transformer-handlebars"],
     "*.ts": ["@parcel/transformer-typescript-tsc"],
   },
   "validators": {
-    "*.ts": ["@parcel/validator-typescript"]
-  }
+    "*.ts": ["@parcel/validator-typescript"],
+  },
 }

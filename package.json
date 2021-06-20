@@ -1,15 +1,18 @@
 {
   "name": "middle.messenger.praktikum.yandex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Learning project at Yandex Praktikum",
   "scripts": {
-    "start": "concurrently \"npm run express\" \"parcel watch static/*.hbs --no-cache\"",
-    "watch": "parcel watch static/*.hbs --no-cache",
+    "start": "concurrently \"npm run express\" \"npm run handle-static && parcel watch './static/**/*.hbs' --no-cache\"",
+    "watch": "parcel watch './static/**/*.hbs' --no-cache",
     "express": "node ./server.js",
-    "build": "npm run lint && parcel build static/*.hbs --no-cache",
+    "build": "npm run handle-static && npm run lint && parcel build './static/**/*.hbs' --no-cache",
     "lint:css": "stylelint \"**/*.scss\" --fix",
     "lint:js": "eslint . --fix --ext .js,.ts",
     "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
+    "handle-static": "npm run sprite:svg && npm run copy:assets",
+    "sprite:svg": "node ./utils/generateSprites.mjs",
+    "copy:assets": "copyfiles -u 1 \"static/assets/**/*\" dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,21 +30,23 @@
   ],
   "homepage": "https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@andreyvolokitin/parcel-transformer-handlebars": "^0.0.1",
-    "@parcel/transformer-sass": "^2.0.0-nightly.716",
+    "@andreyvolokitin/parcel-transformer-handlebars": "^0.0.2",
+    "@parcel/transformer-sass": "^2.0.0-nightly.718",
     "@parcel/transformer-typescript-tsc": "^2.0.0-nightly.716",
     "@parcel/validator-typescript": "^2.0.0-nightly.716",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "autoprefixer": "^10.2.6",
     "concurrently": "^6.1.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "express": "^4.17.1",
-    "parcel": "^2.0.0-nightly.714",
+    "glob": "^7.1.7",
+    "parcel": "^2.0.0-nightly.716",
     "postcss": "^8.3.0",
     "postcss-em-media-query": "^4.1.0",
     "postcss-inline-svg": "^5.0.0",
@@ -49,13 +54,15 @@
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
+    "svg-sprite": "^1.5.0",
     "typescript": "^4.3.2"
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "handlebars": "^4.7.7",
-    "html5-boilerplate": "^8.0.0"
+    "@andreyvolokitin/handlebars.js": "^4.7.9",
+    "html5-boilerplate": "^8.0.0",
+    "nanoid": "^3.1.23"
   }
 }

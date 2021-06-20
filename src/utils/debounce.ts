@@ -11,9 +11,8 @@
 function debounce(ms: number, fn: () => void, isImmediate?: boolean): () => void {
   let timeout: ReturnType<typeof setTimeout> | undefined;
 
-  return () => {
+  return (...args) => {
     // eslint-disable-next-line prefer-rest-params
-    const args = arguments;
 
     if (timeout) {
       clearTimeout(timeout);

@@ -1,0 +1,155 @@
+$message-pad: 1em;
+$message-border-radius: $message-pad;
+$message-content-bg: $ui-color-light;
+$message-self-content-bg: $brand-color-light;
+$message-max-width: 50em;
+$message-attach-min-width: 15.625em;
+$message-file-max-width: 25em;
+$message-avatar-width: 3.5em;
+$message-avatar-gap: .4em;
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1em;
+}
+.message__content,
+.message__attach[data-type="file"] {
+  padding: $message-pad;
+}
+.message__content {
+  position: relative;
+  flex-shrink: 1;
+  max-width: min(#{$message-max-width}, 100%);
+  box-sizing: border-box;
+  border-radius: $message-border-radius;
+  background-color: $message-content-bg;
+}
+.message_self  > .message__content {
+  margin-left: auto;
+  background-color: $message-self-content-bg;
+}
+.message_no-text > .message__content {
+  padding-bottom: 0;
+}
+.message:not(.message_self, .message_no-text[data-attach="media"]) > .message__content,
+.message:not(.message_self) .message__attach[data-type="file"] {
+  border-bottom-left-radius: 0;
+}
+.message[data-attach] > .message__content {
+  min-width: min(#{$message-attach-min-width}, 100%);
+}
+.message[data-attach="file"] > .message__content {
+  max-width: $message-file-max-width;
+}
+.message[data-attach] > .message__avatar + .message__content {
+  min-width: min(#{$message-attach-min-width}, calc(100% - #{$message-avatar-width} - #{$message-avatar-gap}));
+}
+
+/* stylelint-disable no-descending-specificity */
+.message_self:not(.message_no-text[data-attach="media"]) > .message__content,
+.message_self .message__attach[data-type="file"] {
+  border-bottom-right-radius: 0;
+}
+/* stylelint-enable */
+
+.message__username {
+  margin-bottom: .3em;
+}
+.message__avatar {
+  flex-shrink: 0;
+  width: $message-avatar-width;
+  margin-right: $message-avatar-gap;
+}
+
+.message__attach {
+  display: block;
+  margin: -$message-pad;
+  margin-bottom: 0;
+  border-top-left-radius: $message-border-radius;
+  border-top-right-radius: $message-border-radius;
+  overflow: hidden;
+}
+.message__attach:not(:first-child) {
+  margin-top: 0;
+}
+.message__attach[data-type="media"] {
+  margin-bottom: $message-pad;
+}
+.message_no-text .message__attach[data-type="media"] {
+  margin-bottom: 0;
+}
+.message__username + .message__attach[data-type="media"] {
+  margin-top: .5em;
+}
+.message_no-text .message__attach {
+  border-bottom-left-radius: $message-border-radius;
+  border-bottom-right-radius: $message-border-radius;
+}
+.message__username + .message__attach {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.message__attach-media {
+  width: 100%;
+}
+
+.message__text {
+  display: flow-root;
+}
+
+$message-meta-shift: -.15em;
+.message__meta {
+  float: right;
+  margin-left: .4em;
+  white-space: nowrap;
+  position: relative;
+  bottom: $message-meta-shift;
+  pointer-events: none;
+}
+.message_no-text .message__meta {
+  position: absolute;
+  right: $message-pad;
+  bottom: $message-pad + $message-meta-shift;
+  z-index: $z-index-primary + 1;
+}
+.message_self .message__meta:not([data-attach="media"]),
+.message_self .message__time:not([data-attach="media"]) {
+  color: $brand-color;
+}
+.message_no-text:not([data-attach="file"]) .message__meta {
+  @include pill(transparentize($dark-color, .3));
+}
+.message_no-text:not([data-attach="file"]) .message__time {
+  color: $light-color;
+}
+.message_no-text[data-attach="file"] .message__meta {
+  @include pill($message-content-bg);
+}
+.message_self.message_no-text[data-attach="file"] .message__meta {
+  @include pill($message-self-content-bg);
+}
+
+.message__status {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.message__status[data-seen="false"] {
+  background-image: svg-load('assets/img/icons/check.svg', fill=$brand-color);
+}
+.message__status[data-seen="true"] {
+  background-image: svg-load('assets/img/icons/double-check.svg', fill=$brand-color);
+}
+.message_self.message_no-text[data-attach="media"] .message__status[data-seen="false"] {
+  background-image: svg-load('assets/img/icons/check.svg', fill=$light-color);
+}
+.message_self.message_no-text[data-attach="media"] .message__status[data-seen="true"] {
+  background-image: svg-load('assets/img/icons/double-check.svg', fill=$light-color);
+}
+
+
+
+

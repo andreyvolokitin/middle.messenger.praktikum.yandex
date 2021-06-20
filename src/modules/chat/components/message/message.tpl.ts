@@ -1,0 +1,55 @@
+export default `
+<article
+    class="{{class}} {{#is message.text null}}message_no-text{{/is}} {{#if message.self}}message_self{{/if}} message"
+    {{#if message.attach}}
+      data-attach="{{message.attach.type}}"
+    {{/if}}
+>
+  {{#and (is message.self null) (isnt message.user.pic null)}}
+    <div class="message__avatar">
+      {{> avatar tag="a" href="#" size="100%" url=message.user.pic}}
+    </div>
+  {{/and}}
+  <div {{#if message.attach.width}}style="width: {{message.attach.width}}px;"{{/if}} class="message__content">
+    {{#and (is message.self null) (isnt message.user.name null)}}
+      <div class="message__username">
+        {{> link action=1 theme="1" text=message.user.name}}
+      </div>
+    {{/and}}
+
+    {{#if message.attach}}
+      <a data-type="{{message.attach.type}}" href="{{message.attach.url}}" class="message__attach block-link">
+        {{#is message.attach.type "media"}}
+          {{> media
+              class="message__attach-media"
+              url=message.attach.url
+              previewDataURI=message.attach.previewDataURI
+              width=message.attach.width
+              height=message.attach.height
+          }}
+        {{/is}}
+        {{#is message.attach.type "file"}}
+          {{> file class="message__attach-file" url=message.attach.url size=message.attach.size}}
+        {{/is}}
+      </a>
+    {{/if}}
+    {{#*inline "message-meta"}}
+      <span class="message__meta">
+      {{#if message.self}}
+        <span data-seen="{{message.seen}}" class="message__status"></span>
+      {{/if}}
+          {{> time class="message__time" value="12:30"}}
+    </span>
+    {{/inline}}
+    {{#if message.text}}
+      <span class="message__text">
+        {{message.text}}
+        {{> message-meta}}
+      </span>
+    {{else}}
+      {{> message-meta}}
+    {{/if}}
+  </div>
+</article>
+
+`;

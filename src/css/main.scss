@@ -8,39 +8,39 @@
 @import 'base/typography';
 
 // Глобальные компоненты
-@import '../partials/components/scrollbar/scrollbar';
-@import '../partials/components/link/link';
-@import '../partials/components/block-link/block-link';
-@import '../partials/components/focused-within/focused-within';
-@import '../partials/components/heading/heading';
-@import '../partials/components/sider/sider';
-@import '../partials/components/icon/icon';
-@import '../partials/components/button/button';
-@import '../partials/components/input/input';
-@import '../partials/components/error/error';
-@import '../partials/components/avatar/avatar';
-@import '../partials/components/badge/badge';
-@import '../partials/components/time/time';
-@import '../partials/components/media/media';
-@import '../partials/components/file/file';
-@import '../partials/components/field-row/field-row';
-@import '../partials/components/spinner/spinner';
-@import '../partials/components/dropdown/dropdown';
-@import '../partials/components/modal/modal';
-@import '../partials/components/network-error/network-error';
+@import '../components/scrollbar/scrollbar';
+@import '../components/link/link';
+@import '../components/block-link/block-link';
+@import '../components/focused-within/focused-within';
+@import '../components/heading/heading';
+@import '../components/sider/sider';
+@import '../components/icon/icon';
+@import '../components/button/button';
+@import '../components/input/input';
+@import '../components/error/error';
+@import '../components/avatar/avatar';
+@import '../components/badge/badge';
+@import '../components/time/time';
+@import '../components/media/media';
+@import '../components/file/file';
+@import '../components/field-row/field-row';
+@import '../components/spinner/spinner';
+@import '../components/dropdown/dropdown';
+@import '../components/modal/modal';
+@import '../components/network-error/network-error';
 
 // Компоненты модулей
-@import '../partials/modules/components/chat-preview/chat-preview';
-@import '../partials/modules/chat/components/message/message';
+@import '../modules/components/chat-preview/chat-preview';
+@import '../modules/chat/components/message/message';
 
 // Модули
-@import '../partials/modules/chat-list/chat-list';
-@import '../partials/modules/chat/chat';
-@import '../partials/modules/auth/auth';
-@import '../partials/modules/profile/profile';
-@import '../partials/modules/upload-avatar/upload-avatar';
+@import '../modules/chat-list/chat-list';
+@import '../modules/chat/chat';
+@import '../modules/auth/auth';
+@import '../modules/profile/profile';
+@import '../modules/upload-avatar/upload-avatar';
 
 // Лэйаут
-@import '../partials/layout/page/page';
-@import '../partials/layout/messenger/messenger';
+@import '../layout/page/page';
+@import '../layout/messenger/messenger';
 

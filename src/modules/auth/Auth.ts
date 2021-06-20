@@ -1,0 +1,47 @@
+import Block from '../block';
+import Button from '../../components/button';
+import Input from '../../components/input';
+import template from './auth.tpl';
+
+import Validator from '../../utils/Validator';
+import addEventListener from '../../utils/addEventListener';
+
+interface AuthProps extends Props {
+  heading: string;
+}
+
+export default class Auth extends Block {
+  static TEMPLATE = template;
+
+  static DEPS = { Button, Input };
+
+  public form: HTMLFormElement;
+
+  public validator: Validator;
+
+  private _handlers: (() => void)[];
+
+  // определить конструктор, чтобы явно указать набор свойств
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: AuthProps, children: hbs.AST.Program) {
+    super(props, children);
+
+    this.form = this.element.querySelector('.js-auth__form') as HTMLFormElement;
+    this.validator = new Validator(this.form);
+
+    this._handlers = [
+      addEventListener(this.form, 'submit', (e) => {
+        e.preventDefault();
+
+        if (this.validator.valid) {
+          window.location.replace(`${window.location.origin}${this.form.dataset.href}`);
+        }
+      }),
+    ];
+  }
+
+  destroy(): void {
+    this._handlers.forEach((fn) => fn && fn());
+    this._handlers = [];
+  }
+}

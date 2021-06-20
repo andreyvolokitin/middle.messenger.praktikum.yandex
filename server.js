@@ -12,10 +12,10 @@ app.use((err, req, res, next) => {
   if (res.headersSent) {
     return next(err);
   }
-  res.redirect('./500.html');
+  res.redirect('/500');
 });
 app.use((req, res) => {
-  res.redirect('./404.html');
+  res.redirect('/404');
 });
 
 app.listen(port, () => {

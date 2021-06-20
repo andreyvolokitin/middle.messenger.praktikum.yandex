@@ -14,6 +14,11 @@ function addEventListener(
   listener: (e: Event) => unknown,
   options?: EventListenerOptions
 ): () => void {
+  if (!target) {
+    // eslint-disable-next-line
+    return () => {};
+  }
+
   target.addEventListener(type, listener, options);
 
   return () => target.removeEventListener(type, listener, options);
