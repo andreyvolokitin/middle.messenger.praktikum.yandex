@@ -86,19 +86,21 @@ export default class Validator {
     const errors = {} as Record<string, unknown>;
 
     Object.keys(this.rules.validity).forEach((rule) => {
-      if (validity[rule]) {
-        let msg;
-
-        if (typeof (this.rules.validity as Record<string, unknown>)[rule] === 'string') {
-          msg = (this.rules.validity as Record<string, unknown>)[rule];
-        } else {
-          msg = ((this.rules.validity as Record<string, unknown>)[rule] as Record<string, unknown>)[
-            field.type
-          ];
-        }
-
-        errors[rule] = msg;
+      if (!validity[rule]) {
+        return;
       }
+
+      let msg;
+
+      if (typeof (this.rules.validity as Record<string, unknown>)[rule] === 'string') {
+        msg = (this.rules.validity as Record<string, unknown>)[rule];
+      } else {
+        msg = ((this.rules.validity as Record<string, unknown>)[rule] as Record<string, unknown>)[
+          field.type
+        ];
+      }
+
+      errors[rule] = msg;
     });
 
     const errorNames = Object.keys(errors);
