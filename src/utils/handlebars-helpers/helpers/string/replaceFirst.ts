@@ -16,10 +16,11 @@ helpers.replaceFirst = function replaceFirst(
     return string;
   }
 
+  let actualReplacement = replacement;
+
   if (typeof replacement !== 'string') {
-    // eslint-disable-next-line no-param-reassign
-    replacement = '';
+    actualReplacement = '';
   }
 
-  return string.replace(substring, replacement);
+  return string.replace(substring, actualReplacement);
 };
