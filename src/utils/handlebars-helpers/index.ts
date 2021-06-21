@@ -17,7 +17,6 @@ import './helpers/string/reverse';
 import './helpers/string/truncate';
 import './helpers/string/append';
 import './helpers/string/replaceFirst';
-import './helpers/attr';
 import './helpers/isSameDate';
 import './helpers/length';
 import './helpers/filename';
