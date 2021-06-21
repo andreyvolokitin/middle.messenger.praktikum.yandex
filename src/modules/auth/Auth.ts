@@ -33,9 +33,9 @@ export default class Auth extends Block {
       addEventListener(this.form, 'submit', (e) => {
         e.preventDefault();
 
-        if (this.validator.valid) {
-          window.location.replace(`${window.location.origin}${this.form.dataset.href}`);
-        }
+        const filledEntries = [...new FormData(this.form)].filter((entry) => entry[1]);
+
+        console.log(Object.fromEntries(filledEntries));
       }),
     ];
   }
