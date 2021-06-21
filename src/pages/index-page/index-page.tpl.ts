@@ -31,6 +31,9 @@ export default `
     <div class="gap-y-xs">
       {{> button tag="a" href="/signup" display="block" theme="4" text="Нет аккаунта?"}}
     </div>
+    <div class="gap-y-xs">
+      {{> button tag="a" href="/chat-initial" display="block" theme="4" text="Перейти в чат"}}
+    </div>
   {{/auth}}
 {{/page}}
 

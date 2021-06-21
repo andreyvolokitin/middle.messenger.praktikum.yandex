@@ -30,6 +30,9 @@ export default `
     <div class="gap-y-xs">
       {{> button tag="a" href="/" display="block" theme="4" text="Войти"}}
     </div>
+    <div class="gap-y-xs">
+      {{> button tag="a" href="/chat-initial" display="block" theme="4" text="Перейти в чат"}}
+    </div>
   {{/auth}}
 {{/page}}
 
