@@ -82,7 +82,7 @@ export default class Modal extends Block {
   }
 
   destroy(): void {
-    this._handlers.forEach((fn) => fn && fn());
+    this._handlers.forEach((remove) => remove && remove());
     this._handlers = [];
   }
 }

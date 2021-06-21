@@ -54,7 +54,7 @@ export default class Messenger extends Block {
   }
 
   destroy(): void {
-    this._handlers.forEach((fn) => fn && fn());
+    this._handlers.forEach((remove) => remove && remove());
     this._handlers = [];
 
     this._sidebar = null;
