@@ -12,8 +12,7 @@
     "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
     "handle-static": "npm run sprite:svg && npm run copy:assets",
     "sprite:svg": "node ./utils/generateSprites.mjs",
-    "copy:assets": "copyfiles -u 1 \"static/assets/**/*\" dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy:assets": "copyfiles -u 1 \"static/assets/**/*\" dist"
   },
   "repository": {
     "type": "git",

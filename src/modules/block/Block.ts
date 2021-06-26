@@ -161,7 +161,7 @@ export default class Block {
     this.eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this.eventBus.on(Block.EVENTS.FLOW_SCU, debounce(0, this._shouldComponentUpdate.bind(this)));
     this.eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    this.eventBus.on(Block.EVENTS.FLOW_CWU, this._componentDidUpdate.bind(this));
+    this.eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   private _createResources(): void {
@@ -286,7 +286,6 @@ export default class Block {
   // eslint-disable-next-line
   componentDidMount(_props: Props): void {}
 
-  // eslint-disable-next-line class-methods-use-this
   shouldComponentUpdate(_oldProps: Props, _newProps: Props): boolean {
     const isPropsShallowEqual = isShallowEqual(_oldProps, _newProps);
     let isParentPropsShallowEqual = true;
@@ -323,13 +322,14 @@ export default class Block {
 
     assignProps(this.props, nextProps);
 
+    const nextPropsForChildren = nextProps;
+
     // Передать новые свойства детям, кроме спец-свойств
     // todo: передавать только используемые детьми свойства
-    // eslint-disable-next-line no-param-reassign
-    delete nextProps.events;
+    delete nextPropsForChildren.events;
     Object.keys(this.components).forEach((name) => {
       this.components[name].setProps({
-        __parent: assignProps(this.components[name].props.__parent as Props, nextProps),
+        __parent: assignProps(this.components[name].props.__parent as Props, nextPropsForChildren),
       });
     });
   }

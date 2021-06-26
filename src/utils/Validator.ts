@@ -37,6 +37,7 @@ export default class Validator {
       field.matches(
         'button, input[type="submit"], input[type="image"], input[type="button"], input[type="reset"]'
       ) ||
+      !field.form ||
       field.disabled ||
       field.readOnly
     );
@@ -50,7 +51,6 @@ export default class Validator {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   toggleError(field: HTMLElement, errorText: string | false, force: boolean): void {
     const inputWrap = field.closest('.input');
     let errorElem;

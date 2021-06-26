@@ -45,6 +45,7 @@ module.exports = {
         node: true,
       },
       rules: {
+        'class-methods-use-this': 'warn',
         'no-underscore-dangle': 0,
         'linebreak-style': 0,
 
