@@ -1,6 +1,6 @@
 import Handlebars from '@andreyvolokitin/handlebars.js';
 
-import EventBus from '../../utils/eventBus';
+import EventBus from '../../utils/EventBus';
 import PartialsVisitor from './utils/PartialsVisitor';
 import debounce from '../../utils/debounce';
 import addEventListener from '../../utils/addEventListener';
