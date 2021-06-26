@@ -7,5 +7,6 @@ getData().then((data: Record<string, unknown>) => {
     chats: data.chats as Record<string, unknown>[],
     currentChat: (data.chats as Record<string, unknown>[])[1],
   });
+
   mountInto('body', chatView.element);
 });
