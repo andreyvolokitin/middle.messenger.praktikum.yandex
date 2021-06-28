@@ -1,9 +1,6 @@
 import Block from '../block';
 import UploadAvatar from '../upload-avatar';
-import Modal from '../../components/modal';
-import Avatar from '../../components/avatar';
-import Input from '../../components/input';
-import Button from '../../components/button';
+import { Modal, Avatar, Input, Button } from '../../components';
 import template from './profile.tpl';
 
 import Validator from '../../utils/Validator';

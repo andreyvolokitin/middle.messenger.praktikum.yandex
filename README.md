@@ -2,8 +2,6 @@
 
 Учебный проект Яндекс.Практикума: приложение "Мессенджер". [Смотреть на Netlify](https://keen-northcutt-57a9f4.netlify.app).
 
-## Ссылка на PR: [Sprint 2](https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex/pull/2)
-
 ## Установка
 
 Для работы необходим [Node.js >=12.0.0](https://nodejs.org/en/), установленный на вашем компьютере. А также [git](https://git-scm.com/downloads) (не забудьте добавить его в `PATH`).
