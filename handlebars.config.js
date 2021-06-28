@@ -1,9 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  data: 'src/data.json',
-  helpers: 'src/utils/handlebars-helpers/**/*.js',
-  partials: 'src/partials/**/*.hbs',
+  partials: 'src/layout/**/*.hbs',
   partialsOptions: {
     parsePartialName(options, file) {
       return path.parse(file.path).name;

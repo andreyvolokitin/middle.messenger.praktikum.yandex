@@ -1,0 +1,16 @@
+.dropdown {
+  @include beauty-block;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: $z-index-dropdown;
+  display: none;
+  min-width: 13.125rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+.dropdown.is-visible {
+  display: block;
+}

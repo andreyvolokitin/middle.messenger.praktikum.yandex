@@ -14,13 +14,29 @@
 - `npm run express` — старт локлаьного express-сервера,
 - `npm run watch` — запуск parcel в watch-режиме.
 
+## Инструментарий
+
+Типизация:
+- [TypeScript](https://www.typescriptlang.org/)
+
+Процессинг CSS:
+- [SASS](https://sass-lang.com/)
+- [PostCSS](https://github.com/postcss/postcss)
+
+Линтинг и форматрирование: 
+- [ESLint](https://eslint.org/) ([Airbnb config](https://github.com/airbnb/javascript)), 
+- [stylelint](https://stylelint.io/) ([stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)), 
+- [Prettier](https://prettier.io/), 
+- [EditorConfig](https://editorconfig.org/)
+
 ## Зависимости
 
 Проект использует базовые стили из [html5-boilerplate](https://github.com/h5bp/html5-boilerplate).
 
 В качестве шаблонизатора используется [handlebars](https://handlebarsjs.com/).
 
-### Примечание
-Parcel имеет баги, в результате `watch` не перезагружает страницу после редактирования шаблонов (ребилд происходит, но почему-то отваливается вебсокет-соединение)
+Для генерации ID инстансам компонент используется [nanoid](https://github.com/ai/nanoid)
 
+## Производительность
 
+Очень плохая. Нужно попробовать прекомпилировать шаблоны и статические компоненты

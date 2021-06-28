@@ -1,0 +1,14 @@
+.chat-list__item {
+  border-bottom: 1px solid $ui-color;
+}
+.chat-list__item:last-child {
+  border-bottom: none;
+}
+.chat-list__link {
+  transition: background-color $transition-duration;
+}
+a.chat-list__link:hover,
+.chat-list__item.is-current {
+  transition: none;
+  background-color: $brand-color-light;
+}

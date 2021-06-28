@@ -22,6 +22,8 @@ $field-bg-color: transparent;
   background-color: $field-bg-color;
   color: $text-color;
 }
+
+/* stylelint-disable-next-line block-no-empty */
 @mixin field_invalid {}
 
 
@@ -31,7 +33,9 @@ $field-bg-color_1: $ui-color;
 @mixin field-base_1 {
   padding-left: $field-gap-x_1;
   padding-right: $field-gap-x_1;
+
   --field-height: #{$field-height};
+
   border-radius: calc(var(--field-height) / 2);
 }
 @mixin field-skin_1 {
