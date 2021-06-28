@@ -1,9 +1,7 @@
 import Block from '../block';
 import ChatPreview from '../components/chat-preview';
 import Message from './components/message';
-import Button from '../../components/button';
-import Input from '../../components/input';
-import Time from '../../components/time';
+import { Button, Input, Time } from '../../components';
 import template from './chat.tpl';
 import addEventListener from '../../utils/addEventListener';
 import isKeyDown from '../../utils/isKeyDown';

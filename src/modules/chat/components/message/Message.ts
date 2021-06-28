@@ -1,9 +1,5 @@
 import Block from '../../../block';
-import Avatar from '../../../../components/avatar';
-import Media from '../../../../components/media';
-import File from '../../../../components/file';
-import Time from '../../../../components/time';
-import Link from '../../../../components/link';
+import { Avatar, Media, File, Time, Link } from '../../../../components';
 import template from './message.tpl';
 
 interface MessageProps extends Props {

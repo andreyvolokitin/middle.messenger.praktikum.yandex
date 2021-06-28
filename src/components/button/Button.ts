@@ -25,7 +25,7 @@ export default class Button extends Block {
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props?: ButtonProps, children?: hbs.AST.Program) {
+  constructor(props?: ButtonProps, children?: Children) {
     super(props, children);
   }
 }

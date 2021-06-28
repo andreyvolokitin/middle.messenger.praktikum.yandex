@@ -1,7 +1,5 @@
 import Block from '../../modules/block';
-import * as components from '../../components';
-import * as modules from '../../modules';
-import Messenger from '../messenger';
+import { Button } from '../../components';
 import template from './page.tpl';
 
 interface PageProps extends Props {
@@ -13,11 +11,11 @@ interface PageProps extends Props {
 export default class Page extends Block {
   static TEMPLATE = template;
 
-  static DEPS = { ...components, ...modules, Messenger };
+  static DEPS = { Button };
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props?: PageProps, children?: hbs.AST.Program) {
+  constructor(props?: PageProps, children?: Children) {
     super(props, children);
   }
 }

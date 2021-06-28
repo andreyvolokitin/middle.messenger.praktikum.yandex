@@ -1,17 +1,5 @@
 import Block from '../../modules/block';
-import Avatar from '../avatar';
-import Badge from '../badge';
 import Button from '../button';
-import Dropdown from '../dropdown';
-import File from '../file';
-import Icon from '../icon';
-import Img from '../img';
-import Input from '../input';
-import Link from '../link';
-import Media from '../media';
-import Time from '../time';
-import UploadAvatar from '../../modules/upload-avatar';
-import Auth from '../../modules/auth';
 import template from './modal.tpl';
 import addEventListener from '../../utils/addEventListener';
 import onEscapePress from '../../utils/onEscapePress';
@@ -30,27 +18,13 @@ interface ModalProps extends Props {
 export default class Modal extends Block {
   static TEMPLATE = template;
 
-  static DEPS = {
-    Avatar,
-    Badge,
-    Button,
-    Dropdown,
-    File,
-    Icon,
-    Img,
-    Input,
-    Link,
-    Media,
-    Time,
-    UploadAvatar,
-    Auth,
-  };
+  static DEPS = { Button };
 
   private _handlers: (() => void)[];
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: ModalProps, children: hbs.AST.Program) {
+  constructor(props: ModalProps, children: Children) {
     super(props, children);
 
     this._handlers = [

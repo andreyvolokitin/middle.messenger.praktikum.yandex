@@ -1,5 +1,6 @@
 import Block from '../../modules/block';
 import Page from '../../layout/page';
+import Profile from '../../modules/profile';
 import template from './user-info_change-password.tpl';
 
 interface UserInfoChangePasswordProps extends Props {
@@ -10,7 +11,7 @@ interface UserInfoChangePasswordProps extends Props {
 export default class UserInfoChangePassword extends Block {
   static TEMPLATE = template;
 
-  static DEPS = { Page };
+  static DEPS = { Page, Profile };
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor

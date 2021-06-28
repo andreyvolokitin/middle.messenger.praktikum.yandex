@@ -1,8 +1,6 @@
 import Block from '../../modules/block';
-import ChatList from '../../modules/chat-list';
-import Chat from '../../modules/chat';
-import Button from '../../components/button';
-import Input from '../../components/input';
+import { ChatList, Chat } from '../../modules';
+import { Button, Input } from '../../components';
 import template from './messenger.tpl';
 import addEventListener from '../../utils/addEventListener';
 

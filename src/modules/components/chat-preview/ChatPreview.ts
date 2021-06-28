@@ -1,7 +1,5 @@
 import Block from '../../block';
-import Avatar from '../../../components/avatar';
-import Time from '../../../components/time';
-import Badge from '../../../components/badge';
+import { Avatar, Time, Badge } from '../../../components';
 import template from './chat-preview.tpl';
 
 interface ChatPreviewProps extends Props {

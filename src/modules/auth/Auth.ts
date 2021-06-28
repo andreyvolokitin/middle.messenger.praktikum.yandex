@@ -23,7 +23,7 @@ export default class Auth extends Block {
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: AuthProps, children: hbs.AST.Program) {
+  constructor(props: AuthProps, children: Children) {
     super(props, children);
 
     this.form = this.element.querySelector('.js-auth__form') as HTMLFormElement;

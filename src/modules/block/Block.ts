@@ -35,7 +35,7 @@ export default class Block {
 
   private readonly eventBus: EventBus;
 
-  private readonly _children?: hbs.AST.Program;
+  private readonly _children?: Children;
 
   private readonly _ast: hbs.AST.Program;
 
@@ -53,7 +53,7 @@ export default class Block {
     props: Props = {
       events: {},
     },
-    children?: hbs.AST.Program
+    children?: Children
   ) {
     this.props = this._proxifyProps(props);
     this._children = children;
@@ -80,7 +80,7 @@ export default class Block {
     // eslint-disable-next-line
     // @ts-ignore: статические свойства детей должны быть доступны (this.constructor.TEMPLATE)
     const ast = Handlebars.parseWithoutProcessing(this.constructor.TEMPLATE);
-    const partialsVisitor = new PartialsVisitor(this._children, true);
+    const partialsVisitor = new PartialsVisitor(this._children && this._children.ast, true);
 
     partialsVisitor.accept(ast);
 
@@ -111,9 +111,11 @@ export default class Block {
         Object.defineProperties(finalProps, Object.getOwnPropertyDescriptors(params));
 
         const componentName = capitalize(kebabToCamel(name));
-        // eslint-disable-next-line
-        // @ts-ignore: статические свойства детей должны быть доступны (this.constructor.DEPS)
-        const Component = this.constructor.DEPS[componentName];
+        const Component =
+          // eslint-disable-next-line
+          // @ts-ignore: статические свойства детей должны быть доступны (this.constructor.DEPS)
+          this.constructor.DEPS[componentName] ||
+          (this._children && this._children.dependencies[componentName]);
 
         if (!Component) {
           throw new Error(
@@ -123,6 +125,20 @@ export default class Block {
               перечислены все возможные зависимости, либо что не передаёте в качестве детей компоненты,
               не предусмотренные для передачи в этот компонент.`
           );
+        }
+
+        let childrenObj: Children | undefined;
+
+        if (children) {
+          childrenObj = {
+            ast: children,
+            dependencies: {
+              // eslint-disable-next-line
+              // @ts-ignore: статические свойства детей должны быть доступны (this.constructor.DEPS)
+              ...this.constructor.DEPS,
+              ...(this._children && this._children.dependencies),
+            },
+          };
         }
 
         if (iterated) {
@@ -138,11 +154,11 @@ export default class Block {
             )[iteratedIndex];
             components[`${iteratedAliasPrefix}${iteratedIndex}`] = new Component(
               finalProps,
-              children
+              childrenObj
             );
           });
         } else {
-          components[alias] = new Component(finalProps, children);
+          components[alias] = new Component(finalProps, childrenObj);
         }
       });
 
@@ -191,6 +207,24 @@ export default class Block {
         throw new Error('Вы не можете удалить свойство');
       },
     });
+  }
+
+  private _traverseComponent(name: string, ancestor: Block = this): Block | undefined {
+    let component = ancestor.components[name] as Block | undefined;
+
+    if (!component) {
+      const keys = Object.keys(ancestor.components);
+
+      for (let i = 0; i < keys.length; i += 1) {
+        component = this._traverseComponent(name, ancestor.components[keys[i]]);
+
+        if (component) {
+          break;
+        }
+      }
+    }
+
+    return component;
   }
 
   private _addDOMEvents(): void {
@@ -338,8 +372,8 @@ export default class Block {
     return this._element;
   }
 
-  getChild(name: string): unknown {
-    return this.components[name];
+  getComponent(name: string): unknown {
+    return this._traverseComponent(name);
   }
 
   show(): void {

@@ -1,5 +1,4 @@
 import Block from '../../modules/block';
-import Button from '../button';
 import template from './dropdown.tpl';
 import debounce from '../../utils/debounce';
 import onEscapePress from '../../utils/onEscapePress';
@@ -60,7 +59,7 @@ interface DropdownProps extends Props {
 export default class Dropdown extends Block {
   static TEMPLATE = template;
 
-  static DEPS = { Button };
+  static DEPS = {};
 
   static klass = 'js-dropdown';
 
@@ -69,7 +68,7 @@ export default class Dropdown extends Block {
     position: 'left top',
   };
 
-  constructor(props: DropdownProps, children: hbs.AST.Program) {
+  constructor(props: DropdownProps, children: Children) {
     super(props, children);
 
     this._settings = {
