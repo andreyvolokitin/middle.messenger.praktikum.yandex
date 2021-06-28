@@ -1,6 +1,5 @@
 import Block from '../block';
-import Button from '../../components/button';
-import Input from '../../components/input';
+import { Button, Input } from '../../components';
 import template from './auth.tpl';
 
 import Validator from '../../utils/Validator';
