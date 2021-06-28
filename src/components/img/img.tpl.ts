@@ -1,10 +1,10 @@
 export default `
 <img
     class="{{class}}"
-    src="{{url}}"
+    src="{{src}}"
     width="{{width}}"
     height="{{height}}"
-    srcset="{{reverse (replaceFirst (reverse url) '.' '.x2@')}} 2x"
+    srcset="{{reverse (replaceFirst (reverse src) '.' '.x2@')}} 2x"
     alt="{{default alt ""}}"
 />
 

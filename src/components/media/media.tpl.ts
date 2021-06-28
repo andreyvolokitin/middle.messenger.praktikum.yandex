@@ -5,7 +5,7 @@ export default `
 >
   <div style="" class="media__content">
     {{#or (is type null) (is type "image")}}
-      {{> img class="media__item" url=url width=width height=height}}
+      {{> img class="media__item" src=url width=width height=height}}
     {{/or}}
     {{#is type "video"}}
       <video class="media__item" src="{{url}}"></video>
