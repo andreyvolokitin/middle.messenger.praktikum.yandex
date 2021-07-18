@@ -20,11 +20,11 @@ interface InputProps extends Props {
 }
 
 export default class Input extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props?: InputProps) {
-    super(props);
+  constructor(props?: InputProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }

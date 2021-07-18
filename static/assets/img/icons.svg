@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol fill="currentColor" class="abi abi-arrow-left-short" viewBox="0 0 16 16" id="back" xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol fill="currentColor" class="abi abi-plus" viewBox="0 0 16 16" id="add" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</symbol><symbol fill="currentColor" class="bbi bbi-file-earmark-check" viewBox="0 0 16 16" id="attached" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+</symbol><symbol fill="currentColor" class="cbi cbi-arrow-left-short" viewBox="0 0 16 16" id="back" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-</symbol><symbol fill="currentColor" class="bbi bbi-check2" viewBox="0 0 16 16" id="check" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="dbi dbi-check2" viewBox="0 0 16 16" id="check" xmlns="http://www.w3.org/2000/svg">
     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-</symbol><symbol fill="currentColor" class="cbi cbi-x" viewBox="0 0 16 16" id="close" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="ebi ebi-x" viewBox="0 0 16 16" id="close" xmlns="http://www.w3.org/2000/svg">
     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-</symbol><symbol fill="currentColor" class="dbi dbi-check2-all" viewBox="0 0 16 16" id="double-check" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="fbi fbi-check2-all" viewBox="0 0 16 16" id="double-check" xmlns="http://www.w3.org/2000/svg">
     <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
     <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
-</symbol><symbol fill="currentColor" class="ebi ebi-file-earmark" viewBox="0 0 16 16" id="file" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="gbi gbi-file-earmark" viewBox="0 0 16 16" id="file" xmlns="http://www.w3.org/2000/svg">
     <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-</symbol><symbol fill="currentColor" class="fbi fbi-arrow-right-short" viewBox="0 0 16 16" id="forward" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="hbi hbi-arrow-right-short" viewBox="0 0 16 16" id="forward" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-</symbol><symbol fill="currentColor" class="gbi gbi-image" viewBox="0 0 16 16" id="image" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="ibi ibi-image" viewBox="0 0 16 16" id="image" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
     <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-</symbol><symbol fill="currentColor" class="hbi hbi-three-dots-vertical" viewBox="0 0 16 16" id="kebab-vertical" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="jbi jbi-three-dots-vertical" viewBox="0 0 16 16" id="kebab-vertical" xmlns="http://www.w3.org/2000/svg">
     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-</symbol><symbol fill="currentColor" class="ibi ibi-list" viewBox="0 0 16 16" id="menu" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="kbi kbi-list" viewBox="0 0 16 16" id="menu" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
 </symbol><symbol viewBox="0 0 1024 1024" id="not-ok" xmlns="http://www.w3.org/2000/svg"><title>cross</title><path d="M548.203 537.6l289.099-289.098c9.998-9.998 9.998-26.206 0-36.205-9.997-9.997-26.206-9.997-36.203 0l-289.099 289.099-289.098-289.099c-9.998-9.997-26.206-9.997-36.205 0-9.997 9.998-9.997 26.206 0 36.205l289.099 289.098-289.099 289.099c-9.997 9.997-9.997 26.206 0 36.203 5 4.998 11.55 7.498 18.102 7.498s13.102-2.499 18.102-7.499l289.098-289.098 289.099 289.099c4.998 4.998 11.549 7.498 18.101 7.498s13.102-2.499 18.101-7.499c9.998-9.997 9.998-26.206 0-36.203l-289.098-289.098z"/></symbol><symbol viewBox="0 0 1024 1024" id="ok" xmlns="http://www.w3.org/2000/svg"><path d="m 399.81722,796.00281 c -6.552,0 -13.09101,-2.51001 -18.102,-7.499 L 181.54228,589.20961 c -10.01896,-9.97499 -9.997,-26.206 0,-36.203 9.998,-9.997 26.206,-9.997 36.205,0 l 182.07094,181.1922 407.96156,-484.41048 c 9.997,-9.997 26.206,-9.997 36.203,0 9.998,9.998 9.998,26.206 0,36.205 L 417.92022,788.50581 c -5,4.998 -11.55,7.498 -18.102,7.498 z"/></symbol><symbol viewBox="0 0 32 32" fill="none" id="paperclip" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.18662 13.5L14.7628 5.92389L15.7056 6.8667L8.12943 14.4428L7.18662 13.5Z" fill="currentColor"/>
@@ -26,8 +31,8 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5574 23.8709C14.9423 26.486 10.7118 26.4954 8.10831 23.8919C5.50482 21.2884 5.51424 17.0579 8.12936 14.4428L7.18655 13.5C4.0484 16.6381 4.0371 21.7148 7.16129 24.839C10.2855 27.9632 15.3621 27.9518 18.5003 24.8137L17.5574 23.8709Z" fill="currentColor"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6195 13.7806L23.5623 14.7234C26.003 12.2826 26.0118 8.3341 23.5819 5.90417C21.152 3.47424 17.2035 3.48303 14.7627 5.92381L15.7055 6.86662C17.6233 4.94887 20.7257 4.94196 22.6349 6.85119C24.5441 8.76042 24.5372 11.8628 22.6195 13.7806Z" fill="currentColor"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.70092 16.0144C7.95751 17.7578 7.95123 20.5782 9.68689 22.3138C11.4226 24.0495 14.2429 24.0432 15.9863 22.2998L15.0435 21.357C13.8231 22.5774 11.8489 22.5818 10.6339 21.3668C9.41894 20.1518 9.42334 18.1776 10.6437 16.9572L9.70092 16.0144Z" fill="currentColor"/>
-</symbol><symbol fill="currentColor" class="mbi mbi-search" viewBox="0 0 16 16" id="search" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="obi obi-search" viewBox="0 0 16 16" id="search" xmlns="http://www.w3.org/2000/svg">
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</symbol><symbol fill="currentColor" class="nbi nbi-person" viewBox="0 0 16 16" id="user" xmlns="http://www.w3.org/2000/svg">
+</symbol><symbol fill="currentColor" class="pbi pbi-person" viewBox="0 0 16 16" id="user" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
 </symbol></svg>

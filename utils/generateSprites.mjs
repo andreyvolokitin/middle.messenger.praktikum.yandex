@@ -2,6 +2,7 @@
 import SVGSprite from 'svg-sprite';
 import path from 'path';
 import fs from 'fs';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import glob from 'glob';
 
 const cwd = path.resolve('static/assets/img/icons');

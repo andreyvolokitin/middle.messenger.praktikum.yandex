@@ -1,19 +1,16 @@
-.request-spinner,
-.request-spinner::after {
+@use 'sass:math';
+
+$spinner-size: 2em;
+
+.spinner {
+  @include spinner-customizer($spinner-size, $text-color);
+
+  position: absolute;
+  display: none;
+  will-change: transform;
+  animation: spin .4s infinite linear;
   border-radius: 50%;
   box-sizing: border-box;
-}
-.request-spinner {
-  @include spinner-customizer(2em, $text-color);
-
-  display: block;
-  position: absolute;
-  transform: translateZ(0);
-  animation: spin .8s infinite linear;
-}
-.request-spinner::after {
-  width: 100%;
-  height: 100%;
 }
 
 @keyframes spin {
@@ -25,6 +22,15 @@
   }
 }
 
+body > .spinner {
+  left: calc(50% - #{math.div($spinner-size, 2)});
+  top: calc(50% - #{math.div($spinner-size, 2)});
+}
+
 .is-processing {
   position: relative;
 }
+.is-processing > .spinner {
+  display: block;
+}
+

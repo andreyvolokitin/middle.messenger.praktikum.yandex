@@ -4,19 +4,19 @@ export default `
   {{#is tag "a"}}
     href="{{default href "#"}}"
   {{/is}}
+  {{{attrs}}}
 >
   <div class="sider__side">
-    {{> avatar class="js-dropdown-trigger" attrs="data-target=#chat-actions-dropdown" size=picSize url=chatData.avatar}}
+    {{> avatar size=picSize url=data.avatar}}
   </div>
   <div class="chat-preview__content sider__main">
     <div class="chat-preview__content-row">
       <div class="chat-preview__content-slot">
-        <h5 class="chat-preview__head heading">{{chatData.name}}</h5>
+        <h5 class="chat-preview__head heading">{{data.title}}</h5>
       </div>
       {{#unless compact}}
         <div class="chat-preview__content-slot_date chat-preview__content-slot">
-          {{! todo: использовать хэлпер для форматирования дат}}
-          {{> time value="12:30"}}
+          {{> time raw=data.last_message.time value=data.last_message.time}}
         </div>
       {{/unless}}
     </div>
@@ -24,14 +24,12 @@ export default `
       <div class="chat-preview__content-row">
         <div class="chat-preview__content-slot">
           <p class="chat-preview__txt">
-            {{#withLast chatData.messages}}
-              {{truncate this.text 200}}
-            {{/withLast}}
+            {{truncate data.last_message.content 200}}
           </p>
         </div>
         <div class="chat-preview__content-slot_unread chat-preview__content-slot">
-          {{#if chatData.unread}}
-            {{> badge value=chatData.unread}}
+          {{#if data.unread_count}}
+            {{> badge value=data.unread_count}}
           {{/if}}
         </div>
       </div>

@@ -1,24 +1,28 @@
 import Block from '../block';
 import ChatPreview from '../components/chat-preview';
-import Message from './components/message';
-import { Button, Input, Time } from '../../components';
+import { Button, Input } from '../../components';
+import MessageList from './components/message-list';
 import template from './chat.tpl';
 import addEventListener from '../../utils/addEventListener';
 import isKeyDown from '../../utils/isKeyDown';
 import debounce from '../../utils/debounce';
+import MessengerController from '../../controllers/MessengerController';
+import sanitize from '../../utils/sanitize';
 
 const ZERO_WIDTH_SPACE = '\u200B';
 const PARENT_CLONE_CLASSNAME = 'is-clone';
 const OVERFLOWN_TEXTAREA_CLASSNAME = 'is-overflown';
 
 interface ChatProps extends Props {
-  currentChat: Record<string, unknown>;
+  currentChat: ChatData;
 }
 
 export default class Chat extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { ChatPreview, Message, Button, Input, Time };
+  static deps = { ChatPreview, MessageList, Button, Input };
+
+  storeSelectors = ['/currentChat'];
 
   private _chat: Nullable<HTMLElement>;
 
@@ -32,19 +36,26 @@ export default class Chat extends Block {
 
   private _textareaClone: Nullable<HTMLTextAreaElement>;
 
-  private readonly _heightLimit: number;
+  private _heightLimit: number;
 
   private _handlers: (() => void)[];
 
-  constructor(props: ChatProps) {
-    super(props);
+  messengerController: MessengerController;
 
-    if (!this.props.currentChat) {
+  // определить конструктор, чтобы явно указать набор свойств
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: ChatProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
+  }
+
+  init(): void {
+    this._chat = this.element;
+    this._form = this._chat.querySelector('.js-chat__input-form') as HTMLFormElement;
+
+    if (!this._form) {
       return;
     }
 
-    this._chat = this.element;
-    this._form = this._chat.querySelector('.js-chat__input-form') as HTMLFormElement;
     this._textarea = this._chat.querySelector('.js-chat__input-field') as HTMLTextAreaElement;
     this._div = document.createElement('div') as HTMLDivElement;
     this._parentClone = this._textarea.parentNode?.cloneNode(true) as HTMLElement;
@@ -64,6 +75,8 @@ export default class Chat extends Block {
     this._textarea.insertAdjacentElement('afterend', this._parentClone);
     this._textareaClone.replaceWith(this._div);
     this._div.style.height = 'auto';
+
+    this.messengerController = new MessengerController();
 
     this._handlers = [
       addEventListener(this._textarea, 'input', (e: InputEvent) => {
@@ -89,6 +102,10 @@ export default class Chat extends Block {
         window,
         'resize',
         debounce(150, () => {
+          if (!this._isMounted || !this.element.isConnected) {
+            return;
+          }
+
           this.handleTextareaSizing(this._textarea ? this._textarea.value : '');
         })
       ),
@@ -96,6 +113,10 @@ export default class Chat extends Block {
         window,
         'orientationchange',
         debounce(0, () => {
+          if (!this._isMounted || !this.element.isConnected) {
+            return;
+          }
+
           this.handleTextareaSizing(this._textarea ? this._textarea.value : '');
         })
       ),
@@ -134,8 +155,12 @@ export default class Chat extends Block {
     this._textarea.classList.toggle(OVERFLOWN_TEXTAREA_CLASSNAME, isTextareaOverflown);
   }
 
-  sendMessage(msg: string): void {
-    console.log(`Отправить сообщение: ${msg}`);
+  sendMessage(msg: string, isFile = false): void {
+    this.messengerController.sendMessage({
+      chatId: (this.props.currentChat as ChatData).id,
+      content: isFile ? msg : sanitize(msg),
+      type: isFile ? 'file' : 'message',
+    });
     this.resetTextarea();
   }
 
@@ -148,14 +173,22 @@ export default class Chat extends Block {
     this.handleTextareaSizing('');
   }
 
-  componentDidMount(_props: Props) {
+  componentDidMount() {
+    if (this._textarea) {
+      this.handleTextareaSizing(this._textarea.value);
+    }
+  }
+
+  componentDidUpdate() {
     if (this._textarea) {
       this.handleTextareaSizing(this._textarea.value);
     }
   }
 
   destroy(): void {
-    this._handlers.forEach((remove) => remove && remove());
+    if (this._handlers) {
+      this._handlers.forEach((remove) => remove && remove());
+    }
     this._handlers = [];
 
     this._chat = null;

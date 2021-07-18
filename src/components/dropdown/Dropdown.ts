@@ -57,9 +57,9 @@ interface DropdownProps extends Props {
 }
 
 export default class Dropdown extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = {};
+  static deps = {};
 
   static klass = 'js-dropdown';
 
@@ -68,15 +68,18 @@ export default class Dropdown extends Block {
     position: 'left top',
   };
 
-  constructor(props: DropdownProps, children: Children) {
-    super(props, children);
+  constructor(props: DropdownProps, children: Children, params?: BlockParams) {
+    super(props, children, params);
 
     this._settings = {
       ...this._settings,
       ...props.settings,
     };
+  }
 
+  init() {
     instances.set(this.element, this);
+    document.body.appendChild(this.element);
   }
 
   positionAt(target: HTMLElement): void {
@@ -117,9 +120,11 @@ export default class Dropdown extends Block {
   }
 }
 
-function hideAllDropdowns() {
+function hideAllDropdowns(excludeSelector?: string) {
   document
-    .querySelectorAll(`.${Dropdown.klass}.${VISIBLE_CLASS}`)
+    .querySelectorAll(
+      `.${Dropdown.klass}.${VISIBLE_CLASS}${excludeSelector ? `:not(${excludeSelector})` : ''}`
+    )
     .forEach((dropdown: HTMLElement) => toggle(dropdown, null, false));
 }
 
@@ -141,6 +146,7 @@ document.addEventListener('click', (e: MouseEvent) => {
       triggers.set(targetDropdown, new Set([dropdownTrigger]));
     }
 
+    hideAllDropdowns(dropdownTrigger.dataset.target as string);
     instance.toggle(dropdownTrigger);
   } else if (!clickedDropdown) {
     hideAllDropdowns();
@@ -151,6 +157,12 @@ document.addEventListener('click', (e: MouseEvent) => {
   }
 });
 
-window.addEventListener('resize', debounce(150, hideAllDropdowns, true));
-window.addEventListener('orientationchange', debounce(0, hideAllDropdowns));
+window.addEventListener(
+  'resize',
+  debounce(150, () => hideAllDropdowns(), true)
+);
+window.addEventListener(
+  'orientationchange',
+  debounce(0, () => hideAllDropdowns())
+);
 onEscapePress(hideAllDropdowns);

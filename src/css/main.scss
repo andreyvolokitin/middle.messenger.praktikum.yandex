@@ -28,6 +28,7 @@
 @import '../components/dropdown/dropdown';
 @import '../components/modal/modal';
 @import '../components/network-error/network-error';
+@import '../components/filepick/filepick';
 
 // Компоненты модулей
 @import '../modules/components/chat-preview/chat-preview';
@@ -38,9 +39,8 @@
 @import '../modules/chat/chat';
 @import '../modules/auth/auth';
 @import '../modules/profile/profile';
-@import '../modules/upload-avatar/upload-avatar';
 
 // Лэйаут
 @import '../layout/page/page';
-@import '../layout/messenger/messenger';
+@import '../modules/messenger/messenger';
 

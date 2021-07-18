@@ -2,7 +2,9 @@ import Handlebars from '@andreyvolokitin/handlebars.js';
 import { nanoid } from 'nanoid';
 
 import getObjectValue from '../../../utils/getObjectValue';
-import { COMPONENT_COPY_SUFFIX } from '../const';
+import { COMPONENT_CLASSNAME, COMPONENT_COPY_SUFFIX } from '../const';
+import setObjectValue from '../../../utils/setObjectValue';
+import trim from '../../../utils/trim';
 
 /**
  * Собрать метаданные partials, использующихся в шаблоне. Обработать и вернуть AST и метаданные.
@@ -63,11 +65,29 @@ export default class PartialsVisitor extends Handlebars.Visitor {
         let propValue;
 
         if (value.type === 'PathExpression') {
-          propValue = {
-            get() {
-              return getObjectValue(this.__parent, (value as hbs.AST.PathExpression).original);
-            },
-          };
+          const pathValue = (value as hbs.AST.PathExpression).original;
+          const trimmedPathValue = trim(pathValue, './');
+
+          propValue =
+            meta.iterated &&
+            key === meta.iterated.param &&
+            pathValue.startsWith(`${meta.iterated.param}.`)
+              ? {
+                  get() {
+                    return getObjectValue(this, pathValue);
+                  },
+                  set(val: unknown) {
+                    setObjectValue(this, pathValue, val);
+                  },
+                }
+              : {
+                  get() {
+                    return getObjectValue(this.__parent, trimmedPathValue);
+                  },
+                  set(val: unknown) {
+                    setObjectValue(this.__parent, trimmedPathValue, val);
+                  },
+                };
         } else {
           propValue = {
             value: (value as hbs.AST.StringLiteral).original,
@@ -96,8 +116,6 @@ export default class PartialsVisitor extends Handlebars.Visitor {
       meta.children = partial.program;
     }
 
-    this.partials.push(meta);
-
     return meta;
   }
 
@@ -122,9 +140,11 @@ export default class PartialsVisitor extends Handlebars.Visitor {
       return this._children;
     }
 
+    this.partials.push(meta);
+
     // Заменить partial заглушкой с id
     return Handlebars.parseWithoutProcessing(
-      `<i id="${meta.alias}{{#isnt @index null}}${COMPONENT_COPY_SUFFIX}{{@index}}{{/isnt}}"></i>`
+      `<i class="${COMPONENT_CLASSNAME}" id="${meta.alias}{{#isnt @index null}}${COMPONENT_COPY_SUFFIX}{{@index}}{{/isnt}}"></i>`
     );
   }
 

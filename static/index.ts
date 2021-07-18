@@ -1,6 +1,17 @@
-import IndexPage from '../src/pages/index-page';
-import mountInto from '../src/utils/mountInto';
+import '../src/store/storeInstance';
 
-const indexPage = new IndexPage();
+// import '../src/pages/main-page';
+import '../src/pages/chat-view';
+import '../src/pages/profile-page';
+import '../src/pages/profile-edit-page';
+import '../src/pages/profile-edit-password-page';
+import '../src/pages/login';
+import '../src/pages/signup';
+import '../src/pages/page-404';
+import '../src/pages/page-500';
 
-mountInto('body', indexPage.element);
+import RootController from '../src/controllers/RootController';
+
+const rootController = new RootController();
+
+rootController.boot();

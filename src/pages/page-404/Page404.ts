@@ -1,20 +1,20 @@
+import Router from '../../utils/Router';
 import Block from '../../modules/block';
 import Page from '../../layout/page';
 import NetworkError from '../../components/network-error';
 import template from './page-404.tpl';
+import store from '../../store/storeInstance';
 
-interface Page404Props extends Props {
-  [key: string]: unknown;
+class Page404 extends Block {
+  static template = template;
+
+  static deps = { Page, NetworkError };
+
+  static title = 'Страницы нету';
 }
 
-export default class Page404 extends Block {
-  static TEMPLATE = template;
+const router = new Router();
 
-  static DEPS = { Page, NetworkError };
+router.use('/404', Page404, () => store.getState());
 
-  // определить конструктор, чтобы явно указать набор свойств
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props?: Page404Props) {
-    super(props);
-  }
-}
+export default Page404;

@@ -20,6 +20,8 @@ import './helpers/string/replaceFirst';
 import './helpers/isSameDate';
 import './helpers/length';
 import './helpers/filename';
+import './helpers/resourseURL';
+import './helpers/formatJsonDate';
 
 import helpers from './helpers';
 

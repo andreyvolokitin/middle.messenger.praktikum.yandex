@@ -10,7 +10,7 @@ export default `
         }}
       </div>
       <div class="chat__toolbar-slot_main chat__toolbar-slot">
-        {{> chat-preview tag="div" picSize="3.25rem" compact=1 chatData=currentChat}}
+        {{> chat-preview tag="div" picSize="3.25rem" compact=1 data=currentChat}}
       </div>
       <div class="chat__toolbar-slot_actions chat__toolbar-slot">
         {{> button
@@ -24,25 +24,7 @@ export default `
 
     </header>
     <div class="chat__messages scrollbar">
-      {{#each currentChat.messages as |message|}}
-        {{#with (itemAt ../currentChat.messages (subtract @index 1))}}
-          {{#and (gt @index 0) (isnt (isSameDate this.date message.date) true)}}
-            </div>
-          {{/and}}
-          {{#or (eq @index 0) (isnt (isSameDate this.date message.date) true)}}
-            <div class="chat__messages-day">
-              <div class="chat__messages-day-header">
-                {{> time class="chat__messages-day-label" value="23 ноября"}}
-              </div>
-              <ul class="chat__messages-list nolist">
-          {{/or}}
-        {{/with}}
-          <li>
-            {{> message class="chat__message" message=message}}
-          </li>
-      {{/each}}
-          </ul>
-        </div>
+      {{> message-list currentChat=currentChat data=messages user=user}}
     </div>
 
     <form class="js-chat__input-form chat__input" action="#">

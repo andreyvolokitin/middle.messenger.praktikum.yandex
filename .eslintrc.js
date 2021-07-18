@@ -46,6 +46,7 @@ module.exports = {
       },
       rules: {
         'class-methods-use-this': 'warn',
+        '@typescript-eslint/no-this-alias': 'warn',
         'no-underscore-dangle': 0,
         'linebreak-style': 0,
 

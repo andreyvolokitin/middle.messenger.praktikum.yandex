@@ -7,7 +7,7 @@ export default class EventBus {
     this._handlers = {};
   }
 
-  on(name: string, handler: () => unknown): void {
+  on(name: string, handler: (...args: unknown[]) => unknown): void {
     if (!Object.prototype.hasOwnProperty.call(this._handlers, name)) {
       this._handlers[name] = [];
     }
@@ -15,7 +15,7 @@ export default class EventBus {
     this._handlers[name].push(handler);
   }
 
-  off(name: string, handler: () => unknown): void {
+  off(name: string, handler: (...args: unknown[]) => unknown): void {
     if (!Object.prototype.hasOwnProperty.call(this._handlers, name)) {
       throw new Error(`Событие ${name} не существует`);
     }

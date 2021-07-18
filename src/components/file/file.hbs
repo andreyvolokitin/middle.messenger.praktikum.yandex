@@ -1,7 +1,7 @@
 <{{default tag "div"}}
   class="{{class}} file"
   {{#is tag "a"}}
-    href="{{default url "#"}}"
+    href="{{default (resourceURL url) "#"}}"
   {{/is}}
   data-type="{{default type "default"}}"
 >

@@ -14,13 +14,13 @@ interface AvatarProps extends Props {
 }
 
 export default class Avatar extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { Img };
+  static deps = { Img };
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: AvatarProps) {
-    super(props);
+  constructor(props: AvatarProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }

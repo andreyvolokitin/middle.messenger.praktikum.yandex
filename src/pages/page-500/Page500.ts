@@ -1,20 +1,20 @@
+import Router from '../../utils/Router';
 import Block from '../../modules/block';
 import Page from '../../layout/page';
 import NetworkError from '../../components/network-error';
 import template from './page-500.tpl';
+import store from '../../store/storeInstance';
 
-interface Page500Props extends Props {
-  [key: string]: unknown;
+class Page500 extends Block {
+  static template = template;
+
+  static deps = { Page, NetworkError };
+
+  static title = 'Ошибка сервера';
 }
 
-export default class Page500 extends Block {
-  static TEMPLATE = template;
+const router = new Router();
 
-  static DEPS = { Page, NetworkError };
+router.use('/500', Page500, () => store.getState());
 
-  // определить конструктор, чтобы явно указать набор свойств
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props?: Page500Props) {
-    super(props);
-  }
-}
+export default Page500;

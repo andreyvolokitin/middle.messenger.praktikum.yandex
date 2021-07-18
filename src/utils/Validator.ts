@@ -4,6 +4,8 @@ const HAS_ERROR_CLASS = 'has-error';
 const ERROR_CLASS = 'error';
 
 export default class Validator {
+  public options: Record<string, unknown>;
+
   public form: HTMLFormElement;
 
   public elements: Element[];
@@ -12,7 +14,13 @@ export default class Validator {
 
   private _handlers: (() => void)[];
 
-  constructor(form: HTMLFormElement) {
+  constructor(
+    form: HTMLFormElement,
+    options = {
+      ignoreSelector: '.ignore',
+    }
+  ) {
+    this.options = options;
     this.form = form;
     this.form.setAttribute('novalidate', 'true');
     this.elements = [...form.elements];
@@ -20,6 +28,7 @@ export default class Validator {
 
     this._handlers = [
       addEventListener(this.form, 'submit', (e) => this.onSubmit(e)),
+      addEventListener(this.form, 'reset', () => this.onReset()),
       addEventListener(this.form, 'focusin', (e: FocusEvent) =>
         this.validateField(e.target as HTMLFormElement)
       ),
@@ -32,10 +41,18 @@ export default class Validator {
     ];
   }
 
-  private static _isValidatableField(field: HTMLFormElement): boolean {
+  private _isValidatableField(field: HTMLFormElement): boolean {
     return !(
       field.matches(
-        'button, input[type="submit"], input[type="image"], input[type="button"], input[type="reset"]'
+        `
+        button,
+        label,
+        input[type="submit"],
+        input[type="image"],
+        input[type="button"],
+        input[type="reset"],
+        ${this.options.ignoreSelector}
+        `
       ) ||
       !field.form ||
       field.disabled ||
@@ -49,6 +66,10 @@ export default class Validator {
     if (!isValidForm) {
       e.preventDefault();
     }
+  }
+
+  onReset(): void {
+    this.elements.forEach((elem: HTMLFormElement) => this.toggleError(elem, '', false));
   }
 
   toggleError(field: HTMLElement, errorText: string | false, force: boolean): void {
@@ -77,7 +98,7 @@ export default class Validator {
   }
 
   validateField(field: HTMLFormElement): Record<string, unknown> | true {
-    if (!Validator._isValidatableField(field)) {
+    if (!this._isValidatableField(field)) {
       return true;
     }
 

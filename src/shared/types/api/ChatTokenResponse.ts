@@ -1,0 +1,3 @@
+type ChatTokenResponse = {
+  token: 'string';
+};

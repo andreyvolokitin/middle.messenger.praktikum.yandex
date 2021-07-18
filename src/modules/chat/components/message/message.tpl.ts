@@ -1,53 +1,43 @@
 export default `
 <article
-    class="{{class}} {{#is message.text null}}message_no-text{{/is}} {{#if message.self}}message_self{{/if}} message"
-    {{#if message.attach}}
-      data-attach="{{message.attach.type}}"
+    class="{{class}} {{#isnt data.file null}}message_no-text{{/isnt}} {{#is data.user_id user.id}}message_self{{/is}} message"
+    {{#if data.file}}
+      data-attach="{{data.file.content_type}}"
     {{/if}}
 >
-  {{#and (is message.self null) (isnt message.user.pic null)}}
-    <div class="message__avatar">
-      {{> avatar tag="a" href="#" size="100%" url=message.user.pic}}
-    </div>
-  {{/and}}
-  <div {{#if message.attach.width}}style="width: {{message.attach.width}}px;"{{/if}} class="message__content">
-    {{#and (is message.self null) (isnt message.user.name null)}}
-      <div class="message__username">
-        {{> link action=1 theme="1" text=message.user.name}}
-      </div>
-    {{/and}}
-
-    {{#if message.attach}}
-      <a data-type="{{message.attach.type}}" href="{{message.attach.url}}" class="message__attach block-link">
-        {{#is message.attach.type "media"}}
+  <div {{#if data.file.width}}style="width: {{data.file.width}}px;"{{/if}} class="message__content">
+    {{#if data.file}}
+      <a data-type="{{data.file.content_type}}" href="{{resourceURL data.file.path}}" class="message__attach block-link">
+        {{#is data.file.content_type "media"}}
           {{> media
               class="message__attach-media"
-              url=message.attach.url
-              previewDataURI=message.attach.previewDataURI
-              width=message.attach.width
-              height=message.attach.height
+              url=data.file.path
+              width=data.file.width
+              height=data.file.height
           }}
         {{/is}}
-        {{#is message.attach.type "file"}}
-          {{> file class="message__attach-file" url=message.attach.url size=message.attach.size}}
+        {{#is data.file.content_type "file"}}
+          {{> file class="message__attach-file" url=data.file.path name=data.file.filename size=data.file.content_size}}
         {{/is}}
       </a>
     {{/if}}
-    {{#*inline "message-meta"}}
-      <span class="message__meta">
-      {{#if message.self}}
-        <span data-seen="{{message.seen}}" class="message__status"></span>
-      {{/if}}
-          {{> time class="message__time" value="12:30"}}
-    </span>
-    {{/inline}}
-    {{#if message.text}}
+    {{#if data.content}}
       <span class="message__text">
-        {{message.text}}
-        {{> message-meta}}
+        {{data.content}}
+        <span class="message__meta">
+          {{#is data.user_id user.id}}
+            <span data-seen="{{data.is_read}}" class="message__status"></span>
+          {{/is}}
+          {{> time class="message__time" value=data.time}}
+        </span>
       </span>
     {{else}}
-      {{> message-meta}}
+      <span class="message__meta">
+        {{#is data.user_id user.id}}
+          <span data-seen="{{data.is_read}}" class="message__status"></span>
+        {{/is}}
+        {{> time class="message__time" value=data.time}}
+      </span>
     {{/if}}
   </div>
 </article>

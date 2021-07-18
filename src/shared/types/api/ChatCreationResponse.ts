@@ -1,0 +1,3 @@
+type ChatCreationResponse = {
+  id: number;
+};

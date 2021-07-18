@@ -10,11 +10,11 @@ interface LinkProps extends Props {
 }
 
 export default class Link extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: LinkProps) {
-    super(props);
+  constructor(props: LinkProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }

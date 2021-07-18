@@ -8,7 +8,7 @@ export default `
       {{> img class="media__item" src=url width=width height=height}}
     {{/or}}
     {{#is type "video"}}
-      <video class="media__item" src="{{url}}"></video>
+      <video class="media__item" src="{{resourceURL url}}"></video>
     {{/is}}
   </div>
   <div class="media__ui"></div>

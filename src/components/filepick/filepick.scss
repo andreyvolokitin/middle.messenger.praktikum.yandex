@@ -1,0 +1,19 @@
+.filepick {
+  position: relative;
+}
+.filepick__icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 1.5em;
+  height: 1.5em;
+  display: none;
+  background: svg-load('assets/img/icons/attached.svg', fill=$muted-color) no-repeat 50% 50%;
+  background-size: contain;
+}
+.filepick__input:valid ~ .filepick__icon {
+  display: block;
+}
+

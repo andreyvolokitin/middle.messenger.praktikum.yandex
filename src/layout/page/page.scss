@@ -28,8 +28,11 @@ $page-back-thickness: calc(#{$button-height} + .5rem * 2);
   }
 }
 .page__back {
+  @include button-reset;
+
   position: sticky;
   top: 0;
+  width: 100%;
   z-index: $z-index-navigation;
   display: flex;
   align-items: center;

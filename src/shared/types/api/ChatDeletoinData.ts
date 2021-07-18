@@ -1,0 +1,3 @@
+type ChatDeletionData = {
+  chatId: number;
+};
