@@ -72,7 +72,7 @@ export default class Block {
 
   protected _isDisposed: boolean;
 
-  protected list?: [string, ComponentConstructor, string?];
+  protected list?: [string, ComponentConstructor, string, string?];
 
   protected key?: string;
 
@@ -466,6 +466,8 @@ export default class Block {
     deleted: Record<string, unknown>[] = [],
     added: Record<string, unknown>[] = []
   ): void {
+    // eslint-disable-next-line
+    debugger;
     const deletedSelector = deleted.reduce((total, item, i) => {
       let str = total;
 
@@ -494,10 +496,10 @@ export default class Block {
     }
 
     if (added.length && this.list) {
-      const [, ListedComponent, position] = this.list;
+      const [, ListedComponent, componentName, position] = this.list;
       const newFragment = document.createDocumentFragment();
       const partialMetadata = this._partials.find(
-        (partial) => partialToComponentName(partial.name) === ListedComponent.name
+        (partial) => partialToComponentName(partial.name) === componentName
       ) as PartialMetadata;
 
       const thisPropsDescriptors = Object.getOwnPropertyDescriptors(this.props);
