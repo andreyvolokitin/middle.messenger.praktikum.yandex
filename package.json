@@ -6,7 +6,7 @@
     "start": "concurrently \"npm run express\" \"npm run handle-static && parcel watch './static/**/*.html' --no-cache\"",
     "watch": "parcel watch './static/**/*.hbs' --no-cache",
     "express": "node ./server.js",
-    "build": "npm run handle-static && npm run lint && parcel build './static/**/*.hbs' --no-cache",
+    "build": "npm run handle-static && npm run lint && parcel build './static/**/*.html' --no-cache",
     "lint:css": "stylelint \"**/*.scss\" --fix",
     "lint:js": "eslint . --fix --ext .js,.ts",
     "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
