@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 type ProfileData = {
   first_name: string;
   second_name: string;
