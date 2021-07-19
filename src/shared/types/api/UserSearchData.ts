@@ -1,0 +1,3 @@
+type UserSearchData = {
+  login: string;
+};

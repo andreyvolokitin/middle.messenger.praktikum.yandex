@@ -26,7 +26,7 @@ export default `
         {{data.content}}
         <span class="message__meta">
           {{#is data.user_id user.id}}
-            <span data-seen="{{data.is_read}}" class="message__status"></span>
+            <span data-seen="{{#if data.is_read}}true{{else}}false{{/if}}" class="message__status"></span>
           {{/is}}
           {{> time class="message__time" value=data.time}}
         </span>
@@ -34,7 +34,7 @@ export default `
     {{else}}
       <span class="message__meta">
         {{#is data.user_id user.id}}
-          <span data-seen="{{data.is_read}}" class="message__status"></span>
+          <span data-seen="{{#if data.is_read}}true{{else}}false{{/if}}" class="message__status"></span>
         {{/is}}
         {{> time class="message__time" value=data.time}}
       </span>

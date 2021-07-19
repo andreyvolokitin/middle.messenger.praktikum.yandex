@@ -42,4 +42,20 @@ export default class ChatsAPI extends API {
       )
     );
   }
+
+  async addUsers(data: ChatUserManageData): Promise<void> {
+    this.processResponse<void>(
+      await this.http.put('/', {
+        data: JSON.stringify(data),
+      })
+    );
+  }
+
+  async deleteUsers(data: ChatUserManageData): Promise<void> {
+    this.processResponse<void>(
+      await this.http.delete('/', {
+        data: JSON.stringify(data),
+      })
+    );
+  }
 }

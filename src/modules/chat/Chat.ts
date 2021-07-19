@@ -30,6 +30,8 @@ export default class Chat extends Block {
 
   private _textarea: Nullable<HTMLTextAreaElement>;
 
+  private _attach: Nullable<HTMLInputElement>;
+
   private _div: Nullable<HTMLDivElement>;
 
   private _parentClone: Nullable<HTMLElement>;
@@ -57,6 +59,7 @@ export default class Chat extends Block {
     }
 
     this._textarea = this._chat.querySelector('.js-chat__input-field') as HTMLTextAreaElement;
+    this._attach = this._chat.querySelector('.js-chat__attach-input') as HTMLInputElement;
     this._div = document.createElement('div') as HTMLDivElement;
     this._parentClone = this._textarea.parentNode?.cloneNode(true) as HTMLElement;
     this._textareaClone = this._parentClone.querySelector('textarea') as HTMLTextAreaElement;
@@ -79,6 +82,13 @@ export default class Chat extends Block {
     this.messengerController = new MessengerController();
 
     this._handlers = [
+      addEventListener(this._attach, 'change', (_e: InputEvent) => {
+        const formData = new FormData(this._attach!.form as HTMLFormElement);
+
+        formData.delete('message');
+
+        this.messengerController.uploadFile(formData);
+      }),
       addEventListener(this._textarea, 'input', (e: InputEvent) => {
         this.handleTextareaSizing((e.target as HTMLTextAreaElement).value, e.data);
       }),
@@ -194,6 +204,7 @@ export default class Chat extends Block {
     this._chat = null;
     this._form = null;
     this._textarea = null;
+    this._attach = null;
     this._div = null;
     this._parentClone = null;
     this._textareaClone = null;

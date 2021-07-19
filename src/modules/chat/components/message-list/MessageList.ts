@@ -13,7 +13,7 @@ function getCurrentChatId(props: Props) {
 }
 
 interface MessageListProps extends Props {
-  messages: MessageData[];
+  data: MessageData[];
   user: UserData;
 }
 
@@ -31,7 +31,13 @@ export default class MessageList extends Block {
   constructor(props: MessageListProps, ...rest: [Children?, BlockParams?]) {
     super(props, ...rest);
 
-    // this.list = ['data', MessageListItem];
+    this.list = {
+      listName: 'data',
+      componentName: 'MessageListItem',
+      comparator(a, b) {
+        return a.id !== b.id || a.chat_id !== b.chat_id;
+      },
+    };
   }
 
   init() {

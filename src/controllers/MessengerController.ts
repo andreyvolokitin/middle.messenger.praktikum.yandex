@@ -1,4 +1,6 @@
 import ChatsAPI from '../api/ChatsAPI';
+import UserAPI from '../api/UserAPI';
+import ResourcesAPI from '../api/ResourcesAPI';
 import ChatWS from '../api/ChatWS';
 import toggleSpinner from '../utils/toggleSpinner';
 import store from '../store/storeInstance';
@@ -9,6 +11,10 @@ const SOCKET_PING_INTERVAL = 10000;
 
 export default class MessengerController {
   chatsAPI: ChatsAPI;
+
+  userAPI: UserAPI;
+
+  resourcesAPI: ResourcesAPI;
 
   chatWS: ChatWS;
 
@@ -32,6 +38,7 @@ export default class MessengerController {
     }
 
     this.chatsAPI = new ChatsAPI();
+    this.resourcesAPI = new ResourcesAPI();
     this.chatWS = new ChatWS();
     this.router = new Router();
     this.sockets = new Map();
@@ -46,12 +53,17 @@ export default class MessengerController {
   private _onSocketMessage(e: MessageEvent, chatId: number) {
     try {
       const data = JSON.parse(e.data);
+      const payload = {
+        chatId,
+        data,
+      };
       const messageType = data.type;
 
       switch (messageType) {
         case 'message':
         case 'file':
           console.log(`received message for chat ${chatId}:`, data);
+          store.dispatch('MESSAGE_ADD', payload);
           break;
         case 'pong':
           break;
@@ -59,13 +71,8 @@ export default class MessengerController {
           console.log(`received a message list for chat ${chatId}:`, data);
           toggleSpinner(this._loadingChatElem as HTMLElement);
           this._loadingChatElem = null;
-          store.dispatch('MESSAGES_LOAD', {
-            chatId,
-            data,
-          });
+          store.dispatch('MESSAGES_LOAD', payload);
       }
-
-      // store.dispatch('MESSAGE_ADD');
     } catch (err) {
       alert(`Не удалось получить сообщения, попробуйте перезагрузить страницу. \n${err}`);
     }
@@ -101,6 +108,15 @@ export default class MessengerController {
     this.populateChats(container);
   }
 
+  async uploadFile(file: FormData): Promise<FileData | null> {
+    try {
+      return await this.resourcesAPI.create(file);
+    } catch (e) {
+      alert(`Ошибка загрузки файла. Почему FormData не сохраняется в /resources ? \n${e}`);
+      return null;
+    }
+  }
+
   sendMessage(msg: { chatId: number; content: string; type?: 'message' | 'file' }): void {
     const { content, type = 'message', chatId } = msg;
     const socket = this.sockets.get(chatId);
@@ -129,8 +145,6 @@ export default class MessengerController {
       socket.onerror = (e) => this._onSocketError(e, chatId);
 
       this.sockets.set(chatId, socket);
-
-      console.log(`chat socket created for ${chatId}`);
 
       return socket;
     } catch (e) {
@@ -246,6 +260,55 @@ export default class MessengerController {
       return true;
     } catch (e) {
       alert(`Ошибка, попробуйте ещё раз. \n${e}`);
+      return false;
+    } finally {
+      toggleSpinner(actionElem);
+    }
+  }
+
+  async manageUser(
+    data: {
+      user: UserSearchData;
+      chatId: number;
+    },
+    action: 'add' | 'delete',
+    actionElem: HTMLElement
+  ): Promise<boolean> {
+    toggleSpinner(actionElem);
+
+    try {
+      const users = await this.userAPI.search(data.user);
+      const user = users.find((item) => item.login === data.user.login);
+      let method;
+
+      switch (action) {
+        case 'add':
+          method = 'addUser';
+          break;
+        case 'delete':
+          method = 'deleteUser';
+          break;
+        default:
+          break;
+      }
+
+      if (!user) {
+        throw new Error('Пользователь не найден');
+      }
+      if (!method) {
+        return false;
+      }
+
+      // eslint-disable-next-line
+      // @ts-ignore: вызов метода по строке должен работать без доп. телодвижений, но потом исправлю
+      await this.chatsAPI[method]({
+        users: [user.id],
+        chatId: data.chatId,
+      });
+
+      return true;
+    } catch (e) {
+      alert(`Ошибка. \n${e}`);
       return false;
     } finally {
       toggleSpinner(actionElem);

@@ -229,7 +229,7 @@ export default class Store {
           return;
         }
 
-        const trimmedSelector = trim(selector, '/*');
+        const trimmedSelector = trim(selector, '/*!');
         const subtreeClone = cloneDeep(
           getObjectValue(this.state, trimmedSelector, '/', (target, propName) => {
             if (isArray(target)) {

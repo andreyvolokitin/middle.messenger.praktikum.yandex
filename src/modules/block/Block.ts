@@ -72,7 +72,12 @@ export default class Block {
 
   protected _isDisposed: boolean;
 
-  protected list?: [string, ComponentConstructor, string, string?];
+  protected list?: {
+    listName: string;
+    componentName: string;
+    comparator?: (a: Record<string, unknown>, b: Record<string, unknown>) => boolean;
+    position?: 'append' | 'prepend';
+  };
 
   protected key?: string;
 
@@ -466,8 +471,6 @@ export default class Block {
     deleted: Record<string, unknown>[] = [],
     added: Record<string, unknown>[] = []
   ): void {
-    // eslint-disable-next-line
-    debugger;
     const deletedSelector = deleted.reduce((total, item, i) => {
       let str = total;
 
@@ -496,7 +499,7 @@ export default class Block {
     }
 
     if (added.length && this.list) {
-      const [, ListedComponent, componentName, position] = this.list;
+      const { componentName, position } = this.list;
       const newFragment = document.createDocumentFragment();
       const partialMetadata = this._partials.find(
         (partial) => partialToComponentName(partial.name) === componentName
@@ -506,7 +509,9 @@ export default class Block {
 
       added
         .map((_data, i) =>
-          this._instantiateChild(ListedComponent, {
+          // eslint-disable-next-line
+          // @ts-ignore: статические свойства детей должны быть доступны (this.constructor.deps)
+          this._instantiateChild(this.constructor.deps[componentName], {
             parentPropsDescriptors: thisPropsDescriptors,
             childMeta: partialMetadata,
             iteratedSource: added,
@@ -575,12 +580,11 @@ export default class Block {
         return;
       }
 
-      const [listPropName] = list;
+      const { listName } = list;
 
       const { deleted, added } = this._compareLists(
-        (this._oldProps[listPropName] as Record<string, unknown>[]) || [],
-        (newProps[listPropName] as Record<string, unknown>[]) || [],
-        `${this.getBaseKey ? this.getBaseKey() : ''}`
+        (this._oldProps[listName] as Record<string, unknown>[]) || [],
+        (newProps[listName] as Record<string, unknown>[]) || []
       );
 
       if ((deleted && deleted.length) || (added && added.length)) {
@@ -603,20 +607,24 @@ export default class Block {
     this.componentWillUnmount();
   }
 
-  private _compareLists(oldList: unknown[], newList: unknown[], prefix = '') {
+  private _compareLists(oldList: unknown[], newList: unknown[]) {
     if (!oldList || !newList) {
       return {};
     }
 
+    // eslint-disable-next-line
+    // @ts-ignore: свойство существует и объявлено, тайпскрипт тупит.
+    let { comparator } = this.list;
+
+    if (!comparator) {
+      comparator = (a: Record<string, unknown>, b: Record<string, unknown>) => a.id !== b.id;
+    }
+
     const deleted = oldList.filter((oldElem: Record<string, unknown>) =>
-      newList.every(
-        (newElem: Record<string, unknown>) => `${prefix}${oldElem.id}` !== `${prefix}${newElem.id}`
-      )
+      newList.every((newElem: Record<string, unknown>) => comparator(oldElem, newElem))
     );
     const added = newList.filter((newElem: Record<string, unknown>) =>
-      oldList.every(
-        (oldElem: Record<string, unknown>) => `${prefix}${newElem.id}` !== `${prefix}${oldElem.id}`
-      )
+      oldList.every((oldElem: Record<string, unknown>) => comparator(oldElem, newElem))
     );
 
     return { deleted, added };

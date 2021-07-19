@@ -16,7 +16,7 @@ export default `
         display="block"
         text="Удалить пользователя"
         attrs="
-            data-target=#remove-user-modal
+            data-target=#delete-user-modal
         "
     }}
     {{> button

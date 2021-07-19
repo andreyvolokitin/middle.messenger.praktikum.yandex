@@ -38,7 +38,7 @@ export default `
             theme="1"
             title="Прикрепить любой файл"
         }}
-          <input class="js-chat__attach-input sr-only" type="file" />
+          <input class="js-chat__attach-input sr-only" name="file" type="file" />
         {{/button}}
       </div>
       <div class="chat__input-slot_field chat__input-slot">

@@ -15,6 +15,14 @@ export default class UserAPI extends API {
     );
   }
 
+  async search(data: UserSearchData): Promise<UserData[]> {
+    return this.processResponse<UserData[]>(
+      await this.http.post('/search', {
+        data: JSON.stringify(data),
+      })
+    );
+  }
+
   async updatePassword(data: UserPasswordData): Promise<void> {
     return this.processResponse<void>(
       await this.http.put('/password', {

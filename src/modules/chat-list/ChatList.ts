@@ -19,7 +19,11 @@ export default class ChatList extends Block {
   constructor(props: ChatListProps, ...rest: [Children?, BlockParams?]) {
     super(sortPropsList(props, 'chats', 'descending'), ...rest);
 
-    this.list = ['chats', ChatListItem, 'ChatListItem', 'prepend'];
+    this.list = {
+      listName: 'chats',
+      componentName: 'ChatListItem',
+      position: 'prepend',
+    };
   }
 
   init() {

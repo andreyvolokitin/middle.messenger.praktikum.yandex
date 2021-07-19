@@ -1,6 +1,5 @@
 // USER_ADD
 // USER_DELETE
-// MESSAGE_ADD
 /* eslint-disable no-param-reassign */
 import sortById from '../utils/sortById';
 import cloneDeep from '../utils/cloneDeep';
@@ -113,6 +112,9 @@ export default {
       previousChat.selected = false;
     }
 
+    Object.keys(state.messages as Record<string, MessageData>).forEach((key) => {
+      (state.messages as Record<string, Nullable<MessageData[]>>)[key] = null;
+    });
     state.currentChat = null;
   },
 
@@ -123,9 +125,25 @@ export default {
       state.messages = {};
     }
 
-    (state.messages as Record<string, unknown>)[chatId] = sortById(data) as MessageData[];
+    (state.messages as Record<string, MessageData[]>)[chatId] = sortById(data) as MessageData[];
   },
-  MESSAGE_ADD(_payload: Record<string, unknown>, _state: StateTree): void {
-    console.log(_payload);
+  MESSAGE_ADD(payload: { chatId: number; data: MessageData }, state: StateTree): void {
+    const { chatId, data } = payload;
+    const { chats, currentChat } = state;
+    const affectedChat = (chats as ChatData[]).find((chat) => chat.id === chatId) as ChatData;
+    const affectedChatClone = cloneDeep(affectedChat) as ChatData;
+    const { last_message: lastMessage, unread_count: unreadCount } = affectedChatClone;
+
+    (state.messages as Record<string, MessageData[]>)[chatId].push(data);
+    Object.assign(lastMessage, {
+      content: data.content,
+      time: data.time,
+      user: data.user_id, // извините
+    });
+    affectedChat.last_message = lastMessage;
+
+    if ((currentChat as ChatData).id !== chatId) {
+      affectedChat.unread_count = unreadCount + 1;
+    }
   },
 };

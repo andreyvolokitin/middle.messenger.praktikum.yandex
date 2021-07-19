@@ -1,6 +1,6 @@
 export default `
 <div>
-  {{#> modal currentChat=currentChat id="add-user-modal" heading="Добавить пользователя"}}
+  {{#> modal _alias="add-user-modal" currentChat=currentChat id="add-user-modal" heading="Добавить пользователя"}}
     <form data-chat="{{currentChat.id}}" class="js-add-user" action="#">
       <div class="gap-y-gen">
         {{> input
@@ -20,13 +20,13 @@ export default `
       </div>
     </form>
   {{/modal}}
-  {{#> modal currentChat=currentChat id="remove-user-modal" heading="Удалить пользователя"}}
-    <form data-chat="{{currentChat.id}}" class="js-remove-user" action="#">
+  {{#> modal _alias="delete-user-modal" currentChat=currentChat id="delete-user-modal" heading="Удалить пользователя"}}
+    <form data-chat="{{currentChat.id}}" class="js-delete-user" action="#">
       <div class="gap-y-gen">
         {{> input
-            class="js-remove-user__input"
-            name="add-user"
-            id="add-user"
+            class="js-delete-user__input"
+            name="delete-user"
+            id="delete-user"
             hint="Логин"
             float=1
         }}
