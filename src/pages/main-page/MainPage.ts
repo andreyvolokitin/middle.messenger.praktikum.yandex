@@ -1,5 +1,5 @@
 import store from '../../store/storeInstance';
-import Router from '../../utils/Router';
+import Router from '../../utils/router/Router';
 import Block from '../../modules/block';
 import Page from '../../layout/page';
 import Messenger from '../../modules/messenger';

@@ -161,8 +161,6 @@ export default class Store {
       return;
     }
 
-    console.log(action, payload);
-
     this._actions[action](payload, this.state);
   }
 

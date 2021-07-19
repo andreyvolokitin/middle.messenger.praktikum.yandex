@@ -17,4 +17,8 @@ export default class MessageListItem extends Block {
   constructor(props: MessageListItemProps, ...rest: [Children?, BlockParams?]) {
     super(props, ...rest);
   }
+
+  componentDidMount(_props: Props) {
+    this.element.scrollIntoView();
+  }
 }

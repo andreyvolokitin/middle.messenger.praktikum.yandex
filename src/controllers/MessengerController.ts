@@ -5,7 +5,7 @@ import ChatWS from '../api/ChatWS';
 import toggleSpinner from '../utils/toggleSpinner';
 import store from '../store/storeInstance';
 import { ROOT_PATHNAME } from '../shared/const/pathnames';
-import Router from '../utils/Router';
+import Router from '../utils/router/Router';
 
 const SOCKET_PING_INTERVAL = 10000;
 
@@ -38,6 +38,7 @@ export default class MessengerController {
     }
 
     this.chatsAPI = new ChatsAPI();
+    this.userAPI = new UserAPI();
     this.resourcesAPI = new ResourcesAPI();
     this.chatWS = new ChatWS();
     this.router = new Router();
@@ -62,13 +63,13 @@ export default class MessengerController {
       switch (messageType) {
         case 'message':
         case 'file':
-          console.log(`received message for chat ${chatId}:`, data);
           store.dispatch('MESSAGE_ADD', payload);
           break;
         case 'pong':
           break;
+        case 'user connected':
+          break;
         default:
-          console.log(`received a message list for chat ${chatId}:`, data);
           toggleSpinner(this._loadingChatElem as HTMLElement);
           this._loadingChatElem = null;
           store.dispatch('MESSAGES_LOAD', payload);
@@ -283,10 +284,10 @@ export default class MessengerController {
 
       switch (action) {
         case 'add':
-          method = 'addUser';
+          method = 'addUsers';
           break;
         case 'delete':
-          method = 'deleteUser';
+          method = 'deleteUsers';
           break;
         default:
           break;

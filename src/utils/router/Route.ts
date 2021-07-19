@@ -1,5 +1,5 @@
-import store from '../store/storeInstance';
-import trim from './trim';
+import store from '../../store/storeInstance';
+import trim from '../trim';
 
 const components = new WeakMap();
 

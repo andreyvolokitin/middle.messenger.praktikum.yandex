@@ -1,7 +1,7 @@
 import AuthAPI from '../../api/AuthAPI';
 import UserAPI from '../../api/UserAPI';
 import toggleSpinner from '../../utils/toggleSpinner';
-import Router from '../../utils/Router';
+import Router from '../../utils/router/Router';
 import { LOGIN_PATHNAME, PROFILE_PATHNAME } from '../../shared/const/pathnames';
 import store from '../../store/storeInstance';
 

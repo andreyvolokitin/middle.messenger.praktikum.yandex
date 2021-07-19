@@ -1,6 +1,6 @@
 import AuthAPI from '../../api/AuthAPI';
 import toggleSpinner from '../../utils/toggleSpinner';
-import Router from '../../utils/Router';
+import Router from '../../utils/router/Router';
 import { ROOT_PATHNAME } from '../../shared/const/pathnames';
 import STORAGE_KEY from '../../shared/const/storageKey';
 import store from '../../store/storeInstance';

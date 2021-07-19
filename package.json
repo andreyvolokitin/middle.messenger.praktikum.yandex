@@ -1,6 +1,6 @@
 {
   "name": "middle.messenger.praktikum.yandex",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Learning project at Yandex Praktikum",
   "scripts": {
     "start": "concurrently \"npm run express\" \"npm run handle-static && parcel watch './static/**/*.html' --no-cache\"",
@@ -12,7 +12,8 @@
     "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
     "handle-static": "npm run sprite:svg && npm run copy:assets",
     "sprite:svg": "node ./utils/generateSprites.mjs",
-    "copy:assets": "copyfiles -u 1 \"static/assets/**/*\" \"static/favicon.ico\" dist"
+    "copy:assets": "copyfiles -u 1 \"static/assets/**/*\" \"static/favicon.ico\" dist",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

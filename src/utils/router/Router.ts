@@ -1,6 +1,6 @@
 import Route from './Route';
-import sanitize from './sanitize';
-import isDeepEqual from './isDeepEqual';
+import sanitize from '../sanitize';
+import isDeepEqual from '../isDeepEqual';
 
 type RouterOptions = {
   hook: string;

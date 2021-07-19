@@ -45,7 +45,7 @@ export default class ChatsAPI extends API {
 
   async addUsers(data: ChatUserManageData): Promise<void> {
     this.processResponse<void>(
-      await this.http.put('/', {
+      await this.http.put('/users', {
         data: JSON.stringify(data),
       })
     );
@@ -53,7 +53,7 @@ export default class ChatsAPI extends API {
 
   async deleteUsers(data: ChatUserManageData): Promise<void> {
     this.processResponse<void>(
-      await this.http.delete('/', {
+      await this.http.delete('/users', {
         data: JSON.stringify(data),
       })
     );

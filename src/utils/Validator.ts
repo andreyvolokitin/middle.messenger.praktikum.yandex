@@ -166,6 +166,9 @@ export default class Validator {
   };
 
   destroy(): void {
+    (this.form as Nullable<HTMLFormElement>) = null;
+    this.elements = [];
+
     this._handlers.forEach((remove) => remove && remove());
     this._handlers = [];
   }

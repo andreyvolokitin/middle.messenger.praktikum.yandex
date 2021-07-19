@@ -1,4 +1,4 @@
-import Router from '../utils/Router';
+import Router from '../utils/router/Router';
 import AuthController from '../modules/auth/AuthController';
 import { LOGIN_PATHNAME, SIGNUP_PATHNAME, ROOT_PATHNAME } from '../shared/const/pathnames';
 import store from '../store/storeInstance';

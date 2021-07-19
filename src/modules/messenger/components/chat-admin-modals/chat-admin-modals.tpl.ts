@@ -2,12 +2,13 @@ export default `
 <div>
   {{#> modal _alias="add-user-modal" currentChat=currentChat id="add-user-modal" heading="Добавить пользователя"}}
     <form data-chat="{{currentChat.id}}" class="js-add-user" action="#">
-      <div class="gap-y-gen">
+      <div class="gap-y-lg">
         {{> input
             class="js-add-user__input"
             name="add-user"
             id="add-user"
             hint="Логин"
+            required="true"
             float=1
         }}
       </div>
@@ -22,12 +23,13 @@ export default `
   {{/modal}}
   {{#> modal _alias="delete-user-modal" currentChat=currentChat id="delete-user-modal" heading="Удалить пользователя"}}
     <form data-chat="{{currentChat.id}}" class="js-delete-user" action="#">
-      <div class="gap-y-gen">
+      <div class="gap-y-lg">
         {{> input
             class="js-delete-user__input"
             name="delete-user"
             id="delete-user"
             hint="Логин"
+            required="true"
             float=1
         }}
       </div>

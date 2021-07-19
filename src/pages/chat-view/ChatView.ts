@@ -2,7 +2,7 @@ import Block from '../../modules/block';
 import Page from '../../layout/page';
 import template from './chat-view.tpl';
 import Messenger from '../../modules/messenger';
-import Router from '../../utils/Router';
+import Router from '../../utils/router/Router';
 import store from '../../store/storeInstance';
 import { ROOT_PATHNAME } from '../../shared/const/pathnames';
 
