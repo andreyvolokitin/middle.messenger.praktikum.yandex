@@ -1,5 +1,6 @@
 import HTTP from '../utils/HTTP';
 import API_BASE from '../shared/const/apiBase';
+import toCaseDeep from '../utils/toCaseDeep';
 
 type ApiResponse =
   | {
@@ -38,7 +39,7 @@ export default class API {
     const isJSON = contentType && contentType.includes('application/json');
 
     if (isJSON) {
-      parsed = this.parseJSON(response.body as string) as T;
+      parsed = toCaseDeep(this.parseJSON(response.body as string) as T, 'snake', 'camel');
     }
 
     if (!response.ok) {

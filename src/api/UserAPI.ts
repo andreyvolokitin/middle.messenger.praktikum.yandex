@@ -1,4 +1,5 @@
 import API from './API';
+import toCaseDeep from '../utils/toCaseDeep';
 
 export default class UserAPI extends API {
   protected static endpoint = '/user';
@@ -10,7 +11,10 @@ export default class UserAPI extends API {
   async update(data: ProfileData): Promise<UserData> {
     return this.processResponse<UserData>(
       await this.http.put('/profile', {
-        data: JSON.stringify(data),
+        data,
+        formatJSONKeys(d: unknown) {
+          return toCaseDeep(d, 'camel', 'snake');
+        },
       })
     );
   }
@@ -18,7 +22,7 @@ export default class UserAPI extends API {
   async search(data: UserSearchData): Promise<UserData[]> {
     return this.processResponse<UserData[]>(
       await this.http.post('/search', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }
@@ -26,7 +30,7 @@ export default class UserAPI extends API {
   async updatePassword(data: UserPasswordData): Promise<void> {
     return this.processResponse<void>(
       await this.http.put('/password', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }

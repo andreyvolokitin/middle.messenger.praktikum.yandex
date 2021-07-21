@@ -3,11 +3,11 @@ type ChatData = {
   id: number;
   title: string;
   avatar: string;
-  unread_count: number;
-  last_message: {
+  unreadCount: number;
+  lastMessage: {
     user: {
-      first_name: string;
-      second_name: string;
+      firstName: string;
+      secondName: string;
       avatar: string;
       email: string;
       login: string;

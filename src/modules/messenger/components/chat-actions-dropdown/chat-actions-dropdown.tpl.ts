@@ -1,6 +1,6 @@
 export default `
 {{#> dropdown user=user currentChat=currentChat class="js-chat-actions-dropdown" id="chat-actions-dropdown"}}
-  {{#eq user.id currentChat.created_by}}
+  {{#eq user.id currentChat.createdBy}}
     {{> button
         class="js-modal-trigger js-dropdown-cancel"
         theme="3"

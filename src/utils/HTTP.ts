@@ -12,6 +12,7 @@ type RequestOptions = {
   data?: Record<string, unknown> | string | FormData;
   method?: string;
   withCredentials?: boolean;
+  formatJSONKeys?: (val: unknown) => unknown;
   [key: string]: unknown;
 };
 
@@ -85,10 +86,19 @@ export default class HTTP {
       headers = {},
       withCredentials = false,
       data,
+      formatJSONKeys = (val: unknown) => val,
     } = {
       ...finalDefaults,
       ...options,
     };
+
+    const contentType = headers['content-type'];
+    const isJSON = contentType && contentType.includes('application/json');
+    let preparedData = data;
+
+    if (isJSON) {
+      preparedData = JSON.stringify(formatJSONKeys(data as string));
+    }
 
     xhr.open(method as string, url);
     Object.keys(headers as Record<string, string>).forEach((key) =>
@@ -120,7 +130,7 @@ export default class HTTP {
       if (method === METHODS.GET) {
         xhr.send();
       } else {
-        xhr.send(data as Document | BodyInit | null | undefined);
+        xhr.send(preparedData as Document | BodyInit | null | undefined);
       }
     });
   };

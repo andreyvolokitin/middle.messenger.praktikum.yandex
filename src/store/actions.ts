@@ -134,7 +134,7 @@ export default {
         (chat) => chat.id === (currentChat as ChatData).id
       ) as ChatData;
 
-      affectedChat.unread_count = 0;
+      affectedChat.unreadCount = 0;
     }
   },
   MESSAGE_ADD(payload: { chatId: number; data: MessageData }, state: StateTree): void {
@@ -142,20 +142,20 @@ export default {
     const { chats, currentChat } = state;
     const affectedChat = (chats as ChatData[]).find((chat) => chat.id === chatId) as ChatData;
     const affectedChatClone = cloneDeep(affectedChat) as ChatData;
-    const { last_message: lastMessage, unread_count: unreadCount } = affectedChatClone;
+    const { lastMessage, unreadCount } = affectedChatClone;
 
     if (state.messages && (state.messages as Record<string, MessageData[]>)[chatId]) {
       (state.messages as Record<string, MessageData[]>)[chatId].push(data);
     }
 
-    affectedChat.last_message = Object.assign(lastMessage || {}, {
+    affectedChat.lastMessage = Object.assign(lastMessage || {}, {
       content: data.content,
       time: data.time,
-      user: data.user_id, // извините
+      user: data.userId, // извините
     });
 
     if (!currentChat || (currentChat as ChatData).id !== chatId) {
-      affectedChat.unread_count = unreadCount + 1;
+      affectedChat.unreadCount = unreadCount + 1;
     }
   },
 };

@@ -1,6 +1,6 @@
 export default `
 <div class="profile__content">
-    <h4 class="profile__name heading">{{user.first_name}}</h4>
+    <h4 class="profile__name heading">{{user.firstName}}</h4>
     <form data-action="{{action}}" class="js-profile__form" action="#">
       <table class="profile__table">
         <tbody class="profile__table-body">
@@ -62,20 +62,20 @@ export default `
               {{#is action null}}
                 <span class="profile__field">Имя</span>
               {{else}}
-                <label for="first_name" class="profile__field">Имя</label>
+                <label for="firstName" class="profile__field">Имя</label>
               {{/is}}
             </th>
             <td class="profile__table-cell">
               {{#is action null}}
-                <span class="profile__field">{{user.first_name}}&#8203;</span>
+                <span class="profile__field">{{user.firstName}}&#8203;</span>
               {{else}}
                 {{> input
                     wrapperClass="profile__input"
-                    name="first_name"
-                    id="first_name"
+                    name="firstName"
+                    id="firstName"
                     display="inline"
                     theme="2"
-                    value=user.first_name
+                    value=user.firstName
                     required="true"
                     hint="Имя"
                     type="text"
@@ -88,20 +88,20 @@ export default `
               {{#is action null}}
                 <span class="profile__field">Фамилия</span>
               {{else}}
-                <label for="second_name" class="profile__field">Фамилия</label>
+                <label for="secondName" class="profile__field">Фамилия</label>
               {{/is}}
             </th>
             <td class="profile__table-cell">
               {{#is action null}}
-                <span class="profile__field">{{user.second_name}}&#8203;</span>
+                <span class="profile__field">{{user.secondName}}&#8203;</span>
               {{else}}
                 {{> input
                     wrapperClass="profile__input"
-                    name="second_name"
-                    id="second_name"
+                    name="secondName"
+                    id="secondName"
                     display="inline"
                     theme="2"
-                    value=user.second_name
+                    value=user.secondName
                     required="true"
                     hint="Фамилия"
                     type="text"
@@ -114,20 +114,20 @@ export default `
               {{#is action null}}
                 <span class="profile__field">Имя в чате</span>
               {{else}}
-                <label for="display_name" class="profile__field">Имя в чате</label>
+                <label for="displayName" class="profile__field">Имя в чате</label>
               {{/is}}
             </th>
             <td class="profile__table-cell">
               {{#is action null}}
-                <span class="profile__field">{{user.display_name}}&#8203;</span>
+                <span class="profile__field">{{user.displayName}}&#8203;</span>
               {{else}}
                 {{> input
                     wrapperClass="profile__input"
-                    name="display_name"
-                    id="display_name"
+                    name="displayName"
+                    id="displayName"
                     display="inline"
                     theme="2"
-                    value=user.display_name
+                    value=user.displayName
                     hint="Имя в чате"
                     type="text"
                 }}

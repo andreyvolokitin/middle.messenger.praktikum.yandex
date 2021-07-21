@@ -88,6 +88,27 @@
   flex-grow: 1;
 }
 
+$chat-input-filepicker-icon-size: 1.3em;
+.chat__input-filepicker .filepick__icon {
+  width: $chat-input-filepicker-icon-size;
+  height: $chat-input-filepicker-icon-size;
+  top: .1em;
+  left: -1em;
+  z-index: 2;
+}
+.chat__input-filepicker.is-processing .filepick__icon {
+  display: none;
+}
+.chat__input-filepicker.is-processing .button__icon {
+  opacity: 1;
+}
+.chat__input-filepicker > .spinner {
+  @include spinner-customizer(div($chat-input-filepicker-icon-size, 2), $text-color);
+
+  top: -.55em;
+  left: -.85em;
+}
+
 .chat__input-field {
   resize: none;
 }

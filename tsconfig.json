@@ -8,7 +8,9 @@
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots" : ["node_modules/@types"],
+    "types": ["@types/mocha", "@types/chai", "@types/jsdom"]
   },
   "include": ["src/**/*", "static/**/*"]
 }

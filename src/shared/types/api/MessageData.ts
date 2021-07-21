@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 type MessageData = {
-  chat_id: number;
+  chatId: number;
   time: string;
   type: string;
-  user_id: string;
+  userId: string;
   content: string;
   file?: FileData;
 };

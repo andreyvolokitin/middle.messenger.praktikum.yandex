@@ -1,4 +1,5 @@
 import API from './API';
+import toCaseDeep from '../utils/toCaseDeep';
 
 export default class AuthAPI extends API {
   protected static endpoint = '/auth';
@@ -6,7 +7,10 @@ export default class AuthAPI extends API {
   async create(user: UserSignupData): Promise<UserSignupResponse> {
     return this.processResponse<UserSignupResponse>(
       await this.http.post('/signup', {
-        data: JSON.stringify(user),
+        data: user,
+        formatJSONKeys(data: unknown) {
+          return toCaseDeep(data, 'camel', 'snake');
+        },
       })
     );
   }
@@ -19,7 +23,7 @@ export default class AuthAPI extends API {
 
     this.processResponse(
       await this.http.post('/signin', {
-        data: JSON.stringify(user),
+        data: user,
       })
     );
   }

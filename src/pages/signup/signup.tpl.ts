@@ -9,10 +9,10 @@ export default `
         {{> input required="true" name="login" id="login" hint="Логин" autocomplete="username" float=1}}
       </div>
       <div class="gap-y-lg">
-        {{> input required="true" value="" name="first_name" id="first_name" hint="Имя" autocomplete="given-name" float=1}}
+        {{> input required="true" value="" name="firstName" id="firstName" hint="Имя" autocomplete="given-name" float=1}}
       </div>
       <div class="gap-y-lg">
-        {{> input required="true" name="second_name" id="second_name" hint="Фамилия" autocomplete="family-name" float=1}}
+        {{> input required="true" name="secondName" id="secondName" hint="Фамилия" autocomplete="family-name" float=1}}
       </div>
       <div class="gap-y-lg">
         {{> input required="true" name="phone" id="phone" hint="Телефон" type="tel" pattern="\\+7\\([0-9]{3}\\)[0-9]{3}-[0-9]{2}-[0-9]{2}" autocomplete="tel" float=1}}
@@ -21,7 +21,7 @@ export default `
         {{> input required="true"  name="password" id="password" hint="Пароль" type="password" autocomplete="new-password" float=1}}
       </div>
       <div class="gap-y-lg">
-        {{> input required="true"  name="password_repeat" id="password_repeat" hint="Повторите пароль" type="password" autocomplete="new-password" float=1}}
+        {{> input required="true"  name="passwordRepeat" id="passwordRepeat" hint="Повторите пароль" type="password" autocomplete="new-password" float=1}}
       </div>
     </div>
     <div class="gap-y-xs">

@@ -5,7 +5,7 @@ import PartialsVisitor from './utils/PartialsVisitor';
 import debounce from '../../utils/debounce';
 import addEventListener from '../../utils/addEventListener';
 import capitalize from '../../utils/capitalize';
-import kebabToCamel from '../../utils/kebabToCamel';
+import toCase from '../../utils/toCase';
 import isObject from '../../utils/isObject';
 import isDeepEqual from '../../utils/isDeepEqual';
 import getObjectValue from '../../utils/getObjectValue';
@@ -17,7 +17,7 @@ import store from '../../store/storeInstance';
 import { COMPONENT_CLASSNAME, COMPONENT_COPY_SUFFIX } from './const';
 
 function partialToComponentName(partialName: string) {
-  return capitalize(kebabToCamel(partialName));
+  return capitalize(toCase(partialName, 'kebab', 'camel'));
 }
 
 export default class Block {
@@ -68,7 +68,7 @@ export default class Block {
 
   private _storeListener: (newState: StateTree, matchedSelector: string) => unknown;
 
-  protected _isMounted: boolean;
+  isMounted: boolean;
 
   protected _isDisposed: boolean;
 
@@ -117,7 +117,7 @@ export default class Block {
     this.components = {};
     this._eventHandlers = [];
     this._eventBus = new EventBus();
-    this._isMounted = false;
+    this.isMounted = false;
     this._isDisposed = false;
     this._isSilent = false;
 
@@ -641,18 +641,18 @@ export default class Block {
   }
 
   setMounted(): void {
-    if (this._isMounted) {
+    if (this.isMounted) {
       return;
     }
 
-    this._isMounted = true;
+    this.isMounted = true;
     this._eventBus.trigger(Block.EVENTS.FLOW_CDM);
   }
 
   mount(rootSelector: string): void {
     const root = document.querySelector(rootSelector);
 
-    if (this._isMounted || !root) {
+    if (this.isMounted || !root) {
       return;
     }
 
@@ -662,13 +662,13 @@ export default class Block {
   }
 
   unmount(): void {
-    if (!this._isMounted) {
+    if (!this.isMounted) {
       return;
     }
 
     this._eventBus.trigger(Block.EVENTS.FLOW_CWU);
     this.element.remove();
-    this._isMounted = false;
+    this.isMounted = false;
   }
 
   dispose(deleteFromParent = true): void {

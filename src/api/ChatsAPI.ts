@@ -14,7 +14,7 @@ export default class ChatsAPI extends API {
   async create(data: ChatCreationData): Promise<ChatCreationResponse> {
     return this.processResponse<ChatCreationResponse>(
       await this.http.post('/', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }
@@ -22,7 +22,7 @@ export default class ChatsAPI extends API {
   async delete(data: ChatDeletionData): Promise<ChatDeletionResponse> {
     return this.processResponse<ChatDeletionResponse>(
       await this.http.delete('/', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }
@@ -46,7 +46,7 @@ export default class ChatsAPI extends API {
   async addUsers(data: ChatUserManageData): Promise<void> {
     this.processResponse<void>(
       await this.http.put('/users', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }
@@ -54,7 +54,7 @@ export default class ChatsAPI extends API {
   async deleteUsers(data: ChatUserManageData): Promise<void> {
     this.processResponse<void>(
       await this.http.delete('/users', {
-        data: JSON.stringify(data),
+        data,
       })
     );
   }

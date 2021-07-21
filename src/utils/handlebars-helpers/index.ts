@@ -22,6 +22,7 @@ import './helpers/length';
 import './helpers/filename';
 import './helpers/resourseURL';
 import './helpers/formatJsonDate';
+import './helpers/string/startsWith';
 
 import helpers from './helpers';
 
