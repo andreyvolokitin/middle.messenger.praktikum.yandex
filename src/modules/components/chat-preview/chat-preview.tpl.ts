@@ -16,7 +16,7 @@ export default `
       </div>
       {{#unless compact}}
         <div class="chat-preview__content-slot_date chat-preview__content-slot">
-          {{> time raw=data.last_message.time value=data.last_message.time}}
+          {{> time raw=data.lastMessage.time value=data.lastMessage.time}}
         </div>
       {{/unless}}
     </div>
@@ -24,12 +24,12 @@ export default `
       <div class="chat-preview__content-row">
         <div class="chat-preview__content-slot">
           <p class="chat-preview__txt">
-            {{truncate data.last_message.content 200}}
+            {{truncate data.lastMessage.content 200}}
           </p>
         </div>
         <div class="chat-preview__content-slot_unread chat-preview__content-slot">
-          {{#if data.unread_count}}
-            {{> badge value=data.unread_count}}
+          {{#if data.unreadCount}}
+            {{> badge value=data.unreadCount}}
           {{/if}}
         </div>
       </div>

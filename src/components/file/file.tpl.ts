@@ -7,7 +7,7 @@ export default `
   data-type="{{default type "default"}}"
 >
   <div class="file__name">{{name}}</div>
-  <div class="file__size">{{size}}</div>
+  <div class="file__size">{{size}} B</div>
 </{{default tag "div"}}>
 
 `;

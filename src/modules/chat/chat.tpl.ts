@@ -27,18 +27,19 @@ export default `
       {{> message-list currentChat=currentChat data=messages user=user}}
     </div>
 
-    <form class="js-chat__input-form chat__input" action="#">
+    <form class="js-chat__input-form chat__input" novalidate action="#">
       <div class="chat__input-slot">
         {{#> button
             tag="label"
-            class="focused-within"
+            class="focused-within chat__input-filepicker filepick"
             tabindex="-1"
             icon="paperclip"
             iconScale=1.5
             theme="1"
             title="Прикрепить любой файл"
         }}
-          <input class="js-chat__attach-input sr-only" name="file" type="file" />
+          <input class="js-chat__attach-input filepick__input sr-only" required name="resource" type="file" />
+          <div class="filepick__icon"></div>
         {{/button}}
       </div>
       <div class="chat__input-slot_field chat__input-slot">

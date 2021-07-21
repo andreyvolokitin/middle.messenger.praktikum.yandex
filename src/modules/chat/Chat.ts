@@ -7,7 +7,6 @@ import addEventListener from '../../utils/addEventListener';
 import isKeyDown from '../../utils/isKeyDown';
 import debounce from '../../utils/debounce';
 import MessengerController from '../../controllers/MessengerController';
-import sanitize from '../../utils/sanitize';
 
 const ZERO_WIDTH_SPACE = '\u200B';
 const PARENT_CLONE_CLASSNAME = 'is-clone';
@@ -82,12 +81,27 @@ export default class Chat extends Block {
     this.messengerController = new MessengerController();
 
     this._handlers = [
-      addEventListener(this._attach, 'change', (_e: InputEvent) => {
-        const formData = new FormData(this._attach!.form as HTMLFormElement);
+      addEventListener(this._attach, 'change', async (e: InputEvent) => {
+        const input = e.target as HTMLInputElement;
+        const { files } = input;
 
-        formData.delete('message');
+        if (!files || !files.length) {
+          delete input.dataset.attach;
+          return;
+        }
 
-        this.messengerController.uploadFile(formData);
+        const formData = new FormData();
+
+        formData.append('resource', files[0]);
+
+        const fileData = await this.messengerController.uploadFile(
+          formData,
+          input.parentNode as HTMLElement
+        );
+
+        if (fileData) {
+          input.dataset.attach = String(fileData.id);
+        }
       }),
       addEventListener(this._textarea, 'input', (e: InputEvent) => {
         this.handleTextareaSizing((e.target as HTMLTextAreaElement).value, e.data);
@@ -96,7 +110,7 @@ export default class Chat extends Block {
         if (e.key === 'Enter' && !isKeyDown('Shift')) {
           // не добавлять символ в `<textarea>`
           e.preventDefault();
-          this.sendMessage((e.target as HTMLTextAreaElement).value);
+          this.sendMessage();
         }
       }),
       addEventListener(this._textarea, 'blur', (e: KeyboardEvent) => {
@@ -106,13 +120,13 @@ export default class Chat extends Block {
       }),
       addEventListener(this._form, 'submit', (e) => {
         e.preventDefault();
-        this.sendMessage(this._textarea ? this._textarea.value : '');
+        this.sendMessage();
       }),
       addEventListener(
         window,
         'resize',
         debounce(150, () => {
-          if (!this._isMounted || !this.element.isConnected) {
+          if (!this.isMounted || !this.element.isConnected) {
             return;
           }
 
@@ -123,7 +137,7 @@ export default class Chat extends Block {
         window,
         'orientationchange',
         debounce(0, () => {
-          if (!this._isMounted || !this.element.isConnected) {
+          if (!this.isMounted || !this.element.isConnected) {
             return;
           }
 
@@ -165,13 +179,25 @@ export default class Chat extends Block {
     this._textarea.classList.toggle(OVERFLOWN_TEXTAREA_CLASSNAME, isTextareaOverflown);
   }
 
-  sendMessage(msg: string, isFile = false): void {
-    this.messengerController.sendMessage({
-      chatId: (this.props.currentChat as ChatData).id,
-      content: isFile ? msg : sanitize(msg),
-      type: isFile ? 'file' : 'message',
-    });
-    this.resetTextarea();
+  sendMessage(): void {
+    const fileId = this._attach!.dataset.attach;
+    const content = this._textarea!.value.trim();
+
+    if (!content && !fileId) {
+      return;
+    }
+
+    this.messengerController.sendMessage(
+      { content, fileId: fileId! },
+      (this.props.currentChat as ChatData).id
+    );
+
+    this._attach!.value = '';
+    delete this._attach!.dataset.attach;
+
+    if (!fileId && content) {
+      this.resetTextarea();
+    }
   }
 
   resetTextarea(): void {

@@ -35,7 +35,7 @@ export default class MessageList extends Block {
       listName: 'data',
       componentName: 'MessageListItem',
       comparator(a, b) {
-        return a.id !== b.id || a.chat_id !== b.chat_id;
+        return a.id !== b.id || a.chatId !== b.chatId;
       },
     };
   }

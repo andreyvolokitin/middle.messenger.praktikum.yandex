@@ -6,6 +6,8 @@ import toggleSpinner from '../utils/toggleSpinner';
 import store from '../store/storeInstance';
 import { ROOT_PATHNAME } from '../shared/const/pathnames';
 import Router from '../utils/router/Router';
+import sanitize from '../utils/sanitize';
+import toCaseDeep from '../utils/toCaseDeep';
 
 const SOCKET_PING_INTERVAL = 10000;
 
@@ -45,6 +47,9 @@ export default class MessengerController {
     this.sockets = new Map();
     this.socketsPromises = new Map();
     MessengerController._instance = this;
+    // eslint-disable-next-line
+    //@ts-ignore: вызов метода через строковое свойство работает везде, кроме здесь. ХЗ что ему надо.
+    window.contr = this;
   }
 
   private _onSocketError(e: Event, _chatId: number) {
@@ -53,14 +58,18 @@ export default class MessengerController {
 
   private _onSocketMessage(e: MessageEvent, chatId: number) {
     try {
-      const data = JSON.parse(e.data);
+      const data = toCaseDeep(JSON.parse(e.data), 'snake', 'camel') as ParsedJSON;
+
+      if (!data) {
+        throw new Error('Данные недоступны');
+      }
+
       const payload = {
         chatId,
         data,
       };
-      const messageType = data.type;
 
-      switch (messageType) {
+      switch ((data as Record<string, unknown>).type) {
         case 'message':
         case 'file':
           store.dispatch('MESSAGE_ADD', payload);
@@ -109,26 +118,40 @@ export default class MessengerController {
     this.populateChats(container);
   }
 
-  async uploadFile(file: FormData): Promise<FileData | null> {
+  async uploadFile(file: FormData, actionElem: HTMLElement): Promise<FileData | null> {
+    toggleSpinner(actionElem);
+
     try {
       return await this.resourcesAPI.create(file);
     } catch (e) {
-      alert(`Ошибка загрузки файла. Почему FormData не сохраняется в /resources ? \n${e}`);
+      alert(`Ошибка загрузки файла. \n${e}`);
       return null;
+    } finally {
+      toggleSpinner(actionElem);
     }
   }
 
-  sendMessage(msg: { chatId: number; content: string; type?: 'message' | 'file' }): void {
-    const { content, type = 'message', chatId } = msg;
+  sendMessage(
+    msg: {
+      content: string;
+      fileId: string;
+    },
+    chatId: number
+  ): void {
+    const data = {} as OutgoingMessageData;
+    const { content, fileId } = msg;
     const socket = this.sockets.get(chatId);
 
+    if (fileId) {
+      data.type = 'file';
+      data.content = fileId;
+    } else if (content) {
+      data.type = 'message';
+      data.content = sanitize(content);
+    }
+
     if (socket) {
-      socket.send(
-        JSON.stringify({
-          content,
-          type,
-        })
-      );
+      socket.send(JSON.stringify(data));
     }
   }
 

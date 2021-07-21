@@ -14,7 +14,7 @@ export default class Router {
 
   public options: RouterOptions;
 
-  private _currentRoute: Route | null;
+  currentRoute: Route | null;
 
   private _isStarted: boolean;
 
@@ -29,17 +29,17 @@ export default class Router {
     }
 
     this.routes = [];
-    this._currentRoute = null;
+    this.currentRoute = null;
     this._isStarted = false;
     this.options = options;
 
     Router._instance = this;
   }
 
-  private _getPathParams(routePathnam: string, concretePathname: string): Record<string, string> {
+  private _getPathParams(routePathname: string, concretePathname: string): Record<string, string> {
     const concreteSegments = concretePathname.split('/');
 
-    return routePathnam.split('/').reduce((total, segment, i) => {
+    return routePathname.split('/').reduce((total, segment, i) => {
       const result = total;
 
       if (segment.startsWith(':')) {
@@ -60,15 +60,15 @@ export default class Router {
     }
 
     const pathParams = this._getPathParams(route.pathname, pathname);
-    const isSameRoute = this._currentRoute === route;
+    const isSameRoute = this.currentRoute === route;
     const isPathParamsChanged = !isDeepEqual(route.pathParams, pathParams);
 
     if (isSameRoute && !isPathParamsChanged) {
       return;
     }
 
-    route.activate(this.options.root, pathParams, state, this._currentRoute);
-    this._currentRoute = route;
+    route.activate(this.options.root, pathParams, state, this.currentRoute);
+    this.currentRoute = route;
   }
 
   use(
