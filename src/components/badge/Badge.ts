@@ -7,11 +7,11 @@ interface BadgeProps extends Props {
 }
 
 export default class Badge extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: BadgeProps) {
-    super(props);
+  constructor(props: BadgeProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }

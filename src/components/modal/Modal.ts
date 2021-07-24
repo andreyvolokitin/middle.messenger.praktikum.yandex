@@ -16,17 +16,19 @@ interface ModalProps extends Props {
 }
 
 export default class Modal extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { Button };
+  static deps = { Button };
 
   private _handlers: (() => void)[];
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: ModalProps, children: Children) {
-    super(props, children);
+  constructor(props: ModalProps, children: Children, params?: BlockParams) {
+    super(props, children, params);
+  }
 
+  init() {
     this._handlers = [
       addEventListener(this.element, 'click', (e: MouseEvent) => {
         if ((e.target as HTMLElement).closest(`.${MODAL_CLASS}__close, [data-cancel]`)) {
@@ -35,7 +37,6 @@ export default class Modal extends Block {
       }),
       onEscapePress(() => this.close()),
     ];
-
     instances.set(this.element, this);
   }
 
@@ -53,6 +54,11 @@ export default class Modal extends Block {
 
   close(): void {
     this.element.classList.remove(VISIBLE_CLASS);
+    this.reset();
+  }
+
+  reset(): void {
+    this.element.querySelectorAll('form').forEach((form) => form.reset());
   }
 
   destroy(): void {

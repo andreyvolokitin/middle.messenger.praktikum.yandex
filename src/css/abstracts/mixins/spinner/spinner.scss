@@ -3,9 +3,9 @@
 @mixin spinner-customizer($size: 1em, $color: $text-color) {
   width: $size;
   height: $size;
-  border-top: math.div($size, 8) solid transparentize($color, 0.8);
-  border-right: math.div($size, 8) solid transparentize($color, 0.8);
-  border-bottom: math.div($size, 8) solid transparentize($color, 0.8);
-  border-left: math.div($size, 8) solid $color;
+  border-style: solid;
+  border-color: transparentize($color, 0.8);
+  border-left-color: $color;
+  border-width: calc(#{$size} / 8);
   border-radius: 50%;
 }

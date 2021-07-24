@@ -19,13 +19,13 @@ interface ButtonProps extends Props {
 }
 
 export default class Button extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { Icon };
+  static deps = { Icon };
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props?: ButtonProps, children?: Children) {
-    super(props, children);
+  constructor(props?: ButtonProps, children?: Children, params?: BlockParams) {
+    super(props, children, params);
   }
 }

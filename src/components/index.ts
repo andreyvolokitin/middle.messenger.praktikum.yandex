@@ -1,5 +1,3 @@
-// Ре-экспорт для bulk-инициализации
-// (CSS-only блоки не экспортируются, т.к. их не нужно инициализировать)
 export { default as Avatar } from './avatar';
 export { default as Badge } from './badge';
 export { default as Button } from './button';

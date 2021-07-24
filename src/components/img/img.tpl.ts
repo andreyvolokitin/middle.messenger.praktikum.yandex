@@ -1,11 +1,13 @@
 export default `
 <img
     class="{{class}}"
-    src="{{src}}"
+    src="{{resourceURL src}}"
     width="{{width}}"
     height="{{height}}"
-    srcset="{{reverse (replaceFirst (reverse src) '.' '.x2@')}} 2x"
-    alt="{{default alt ""}}"
+    {{#if retina}}
+      srcset="{{resourceURL (reverse (replaceFirst (reverse src) '.' '.x2@'))}} 2x"
+    {{/if}}
+    alt="{{default alt ''}}"
 />
 
 `;

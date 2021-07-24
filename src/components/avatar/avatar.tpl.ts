@@ -13,11 +13,13 @@ export default `
   {{{attrs}}}
 >
   <div
-      class="avatar__pic"
+      class="avatar__pic {{#if retina}}avatar__pic_retina{{/if}}"
       style="
         {{#if url}}
-          background-image:url({{url}});
-          --at2x: url({{reverse (replaceFirst (reverse url) '.' '.x2@')}});
+          background-image:url({{resourceURL url}});
+          {{#if retina}}
+            --at2x: url({{resourceURL (reverse (replaceFirst (reverse url) '.' '.x2@'))}});
+          {{/if}}
         {{/if}}
         {{#and width height (is size null)}}
           padding-top: {{multiply 100 (divide (float height) (float width))}}%;

@@ -1,4 +1,5 @@
 import helpers from '../helpers';
+import isValidDate from './utils/isValidDate';
 
 /**
  * Форматировать дату в виде строки в фомате ISO 8601 (ГГГГ-ММ-ДД)
@@ -7,15 +8,6 @@ import helpers from '../helpers';
  */
 function dateToISO8601(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-}
-
-/**
- * Проверить валидность даты, возвращаемой через `new Date()`
- * @param date - инстанс `new Date()`
- * @returns {boolean|boolean}
- */
-function isValidDate(date: Date): boolean {
-  return !Number.isNaN(+date);
 }
 
 /**

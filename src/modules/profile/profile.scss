@@ -3,8 +3,11 @@ $profile-bp: 37.5 * $font-size-primary; // 600px при шрифте 16px
   margin: $gap-y-lg auto;
   max-width: 45rem;
 }
-.profile__head {
+.profile__head,
+.profile__name {
   text-align: center;
+}
+.profile__head {
   margin-bottom: $gap-y-lg;
 }
 .profile__pic {
@@ -114,12 +117,15 @@ td.profile__table-cell {
 
 .profile__field {
   display: inline-block;
-  padding: ($field-gap-y * 2.5) 0 $field-gap-y;
   line-height: $field-line-height;
+  padding: ($field-gap-y * 2.5) 0 $field-gap-y;
 
   @media (min-width: $profile-bp) {
     padding: $field-gap-y 0 ($field-gap-y * 3);
   }
+}
+td > .profile__field {
+  padding-top: $field-gap-y;
 }
 
 .profile__input[data-display="inline"] {
@@ -127,6 +133,7 @@ td.profile__table-cell {
 
   @media (min-width: $profile-bp) {
     display: inline-flex;
+    width: 100%;
   }
 }
 

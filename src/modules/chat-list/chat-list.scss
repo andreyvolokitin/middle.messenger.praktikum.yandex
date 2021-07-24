@@ -10,5 +10,10 @@
 a.chat-list__link:hover,
 .chat-list__item.is-current {
   transition: none;
+}
+a.chat-list__link:hover {
+  background-color: transparentize($brand-color-light, .5);
+}
+.chat-list__item.is-current {
   background-color: $brand-color-light;
 }

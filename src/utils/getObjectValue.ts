@@ -1,12 +1,18 @@
-export default function getObjectValue(obj: Record<string, unknown>, path: string): unknown {
+export default function getObjectValue(
+  obj: Record<string, unknown> | unknown[],
+  path: string,
+  separator = '.',
+  propGetter = (val: Record<string, unknown> | unknown[], prop: string) => Reflect.get(val, prop)
+): unknown {
   return path
-    .split('.')
+    .split(separator)
     .slice()
-    .reduce((value, prop, i, arr) => {
-      const segment = value[prop];
+    .reduce((value, prop, _i, arr) => {
+      const segment = propGetter(value, prop);
+      const array = arr;
 
       if (!segment) {
-        arr.splice(i - 1);
+        array.length = 0;
       }
 
       return segment;

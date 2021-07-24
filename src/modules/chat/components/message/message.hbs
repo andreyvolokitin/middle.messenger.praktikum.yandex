@@ -4,9 +4,9 @@
     data-attach="{{message.attach.type}}"
   {{/if}}
 >
-  {{#and (is message.self null) (isnt message.user.pic null)}}
+  {{#and (is message.self null) (isnt message.user.avatar null)}}
     <div class="message__avatar">
-      {{> avatar tag="a" href="#" size="100%" url=message.user.pic}}
+      {{> avatar tag="a" href="#" size="100%" url=message.user.avatar}}
     </div>
   {{/and}}
   <div {{#if message.attach.width}}style="width: {{message.attach.width}}px;"{{/if}} class="message__content">
@@ -17,7 +17,7 @@
     {{/and}}
 
     {{#if message.attach}}
-      <a data-type="{{message.attach.type}}" href="{{message.attach.url}}" class="message__attach block-link">
+      <a data-type="{{message.attach.type}}" href="{{resourceURL message.attach.url}}" class="message__attach block-link">
         {{#is message.attach.type "media"}}
           {{> media
               class="message__attach-media"

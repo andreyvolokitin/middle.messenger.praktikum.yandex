@@ -10,9 +10,9 @@ interface IconProps extends Props {
 export default class Icon extends Block {
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: IconProps) {
-    super(props);
+  constructor(props: IconProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 
-  static TEMPLATE = template;
+  static template = template;
 }

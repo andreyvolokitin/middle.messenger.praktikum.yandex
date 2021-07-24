@@ -11,13 +11,13 @@ interface MediaProps extends Props {
 }
 
 export default class Media extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { Img };
+  static deps = { Img };
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props: MediaProps) {
-    super(props);
+  constructor(props: MediaProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }

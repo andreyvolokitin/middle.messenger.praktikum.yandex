@@ -1,24 +1,27 @@
 import Block from '../block';
 import ChatPreview from '../components/chat-preview';
-import Message from './components/message';
-import { Button, Input, Time } from '../../components';
+import { Button, Input } from '../../components';
+import MessageList from './components/message-list';
 import template from './chat.tpl';
 import addEventListener from '../../utils/addEventListener';
 import isKeyDown from '../../utils/isKeyDown';
 import debounce from '../../utils/debounce';
+import MessengerController from '../../controllers/MessengerController';
 
 const ZERO_WIDTH_SPACE = '\u200B';
 const PARENT_CLONE_CLASSNAME = 'is-clone';
 const OVERFLOWN_TEXTAREA_CLASSNAME = 'is-overflown';
 
 interface ChatProps extends Props {
-  currentChat: Record<string, unknown>;
+  currentChat: ChatData;
 }
 
 export default class Chat extends Block {
-  static TEMPLATE = template;
+  static template = template;
 
-  static DEPS = { ChatPreview, Message, Button, Input, Time };
+  static deps = { ChatPreview, MessageList, Button, Input };
+
+  storeSelectors = ['/currentChat'];
 
   private _chat: Nullable<HTMLElement>;
 
@@ -26,26 +29,36 @@ export default class Chat extends Block {
 
   private _textarea: Nullable<HTMLTextAreaElement>;
 
+  private _attach: Nullable<HTMLInputElement>;
+
   private _div: Nullable<HTMLDivElement>;
 
   private _parentClone: Nullable<HTMLElement>;
 
   private _textareaClone: Nullable<HTMLTextAreaElement>;
 
-  private readonly _heightLimit: number;
+  private _heightLimit: number;
 
   private _handlers: (() => void)[];
 
-  constructor(props: ChatProps) {
-    super(props);
+  messengerController: MessengerController;
 
-    if (!this.props.currentChat) {
+  // определить конструктор, чтобы явно указать набор свойств
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props: ChatProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
+  }
+
+  init(): void {
+    this._chat = this.element;
+    this._form = this._chat.querySelector('.js-chat__input-form') as HTMLFormElement;
+
+    if (!this._form) {
       return;
     }
 
-    this._chat = this.element;
-    this._form = this._chat.querySelector('.js-chat__input-form') as HTMLFormElement;
     this._textarea = this._chat.querySelector('.js-chat__input-field') as HTMLTextAreaElement;
+    this._attach = this._chat.querySelector('.js-chat__attach-input') as HTMLInputElement;
     this._div = document.createElement('div') as HTMLDivElement;
     this._parentClone = this._textarea.parentNode?.cloneNode(true) as HTMLElement;
     this._textareaClone = this._parentClone.querySelector('textarea') as HTMLTextAreaElement;
@@ -65,7 +78,31 @@ export default class Chat extends Block {
     this._textareaClone.replaceWith(this._div);
     this._div.style.height = 'auto';
 
+    this.messengerController = new MessengerController();
+
     this._handlers = [
+      addEventListener(this._attach, 'change', async (e: InputEvent) => {
+        const input = e.target as HTMLInputElement;
+        const { files } = input;
+
+        if (!files || !files.length) {
+          delete input.dataset.attach;
+          return;
+        }
+
+        const formData = new FormData();
+
+        formData.append('resource', files[0]);
+
+        const fileData = await this.messengerController.uploadFile(
+          formData,
+          input.parentNode as HTMLElement
+        );
+
+        if (fileData) {
+          input.dataset.attach = String(fileData.id);
+        }
+      }),
       addEventListener(this._textarea, 'input', (e: InputEvent) => {
         this.handleTextareaSizing((e.target as HTMLTextAreaElement).value, e.data);
       }),
@@ -73,7 +110,7 @@ export default class Chat extends Block {
         if (e.key === 'Enter' && !isKeyDown('Shift')) {
           // не добавлять символ в `<textarea>`
           e.preventDefault();
-          this.sendMessage((e.target as HTMLTextAreaElement).value);
+          this.sendMessage();
         }
       }),
       addEventListener(this._textarea, 'blur', (e: KeyboardEvent) => {
@@ -83,12 +120,16 @@ export default class Chat extends Block {
       }),
       addEventListener(this._form, 'submit', (e) => {
         e.preventDefault();
-        this.sendMessage(this._textarea ? this._textarea.value : '');
+        this.sendMessage();
       }),
       addEventListener(
         window,
         'resize',
         debounce(150, () => {
+          if (!this.isMounted || !this.element.isConnected) {
+            return;
+          }
+
           this.handleTextareaSizing(this._textarea ? this._textarea.value : '');
         })
       ),
@@ -96,6 +137,10 @@ export default class Chat extends Block {
         window,
         'orientationchange',
         debounce(0, () => {
+          if (!this.isMounted || !this.element.isConnected) {
+            return;
+          }
+
           this.handleTextareaSizing(this._textarea ? this._textarea.value : '');
         })
       ),
@@ -134,9 +179,25 @@ export default class Chat extends Block {
     this._textarea.classList.toggle(OVERFLOWN_TEXTAREA_CLASSNAME, isTextareaOverflown);
   }
 
-  sendMessage(msg: string): void {
-    console.log(`Отправить сообщение: ${msg}`);
-    this.resetTextarea();
+  sendMessage(): void {
+    const fileId = this._attach!.dataset.attach;
+    const content = this._textarea!.value.trim();
+
+    if (!content && !fileId) {
+      return;
+    }
+
+    this.messengerController.sendMessage(
+      { content, fileId: fileId! },
+      (this.props.currentChat as ChatData).id
+    );
+
+    this._attach!.value = '';
+    delete this._attach!.dataset.attach;
+
+    if (!fileId && content) {
+      this.resetTextarea();
+    }
   }
 
   resetTextarea(): void {
@@ -148,19 +209,28 @@ export default class Chat extends Block {
     this.handleTextareaSizing('');
   }
 
-  componentDidMount(_props: Props) {
+  componentDidMount() {
+    if (this._textarea) {
+      this.handleTextareaSizing(this._textarea.value);
+    }
+  }
+
+  componentDidUpdate() {
     if (this._textarea) {
       this.handleTextareaSizing(this._textarea.value);
     }
   }
 
   destroy(): void {
-    this._handlers.forEach((remove) => remove && remove());
+    if (this._handlers) {
+      this._handlers.forEach((remove) => remove && remove());
+    }
     this._handlers = [];
 
     this._chat = null;
     this._form = null;
     this._textarea = null;
+    this._attach = null;
     this._div = null;
     this._parentClone = null;
     this._textareaClone = null;

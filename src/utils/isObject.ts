@@ -1,3 +1,3 @@
-export default function isObject(obj: unknown): boolean {
-  return Boolean(obj) && Object.prototype.toString.call(obj) === '[object Object]';
+export default function isObject(val: unknown): val is Record<string, unknown> {
+  return Boolean(val) && Object.prototype.toString.call(val) === '[object Object]';
 }

@@ -8,14 +8,18 @@ interface SignupProps extends Props {
   [key: string]: unknown;
 }
 
-export default class Signup extends Block {
-  static TEMPLATE = template;
+class Signup extends Block {
+  static template = template;
 
-  static DEPS = { Page, Auth, Input, Button };
+  static deps = { Page, Auth, Input, Button };
+
+  static title = 'Регистрация';
 
   // определить конструктор, чтобы явно указать набор свойств
   // eslint-disable-next-line no-useless-constructor
-  constructor(props?: SignupProps) {
-    super(props);
+  constructor(props?: SignupProps, ...rest: [Children?, BlockParams?]) {
+    super(props, ...rest);
   }
 }
+
+export default Signup;
