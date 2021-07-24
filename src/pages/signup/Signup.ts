@@ -1,11 +1,8 @@
-import Router from '../../utils/router/Router';
 import Block from '../../modules/block';
 import Page from '../../layout/page';
 import Auth from '../../modules/auth';
 import { Input, Button } from '../../components';
 import template from './signup.tpl';
-import { SIGNUP_PATHNAME } from '../../shared/const/pathnames';
-import store from '../../store/storeInstance';
 
 interface SignupProps extends Props {
   [key: string]: unknown;
@@ -24,9 +21,5 @@ class Signup extends Block {
     super(props, ...rest);
   }
 }
-
-const router = new Router();
-
-router.use(SIGNUP_PATHNAME, Signup, () => store.getState());
 
 export default Signup;
