@@ -47,9 +47,6 @@ export default class MessengerController {
     this.sockets = new Map();
     this.socketsPromises = new Map();
     MessengerController._instance = this;
-    // eslint-disable-next-line
-    //@ts-ignore: вызов метода через строковое свойство работает везде, кроме здесь. ХЗ что ему надо.
-    window.contr = this;
   }
 
   private _onSocketError(e: Event, _chatId: number) {

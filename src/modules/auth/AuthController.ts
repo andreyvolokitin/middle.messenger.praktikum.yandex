@@ -36,7 +36,7 @@ export default class AuthController {
     toggleSpinner(actionElem);
 
     try {
-      await this.authAPI.update(user);
+      await this.authAPI.login(user);
 
       const userData = await this.getAuthorizedUser();
 

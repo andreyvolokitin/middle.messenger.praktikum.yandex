@@ -15,17 +15,16 @@ export default class AuthAPI extends API {
     );
   }
 
-  async update(user: UserLoginData | false): Promise<void> {
-    if (user === false) {
-      this.processResponse(await this.http.post('/logout'));
-      return;
-    }
-
+  async login(user: UserLoginData): Promise<void> {
     this.processResponse(
       await this.http.post('/signin', {
         data: user,
       })
     );
+  }
+
+  async logout(): Promise<void> {
+    this.processResponse(await this.http.post('/logout'));
   }
 
   async request(): Promise<UserData> {

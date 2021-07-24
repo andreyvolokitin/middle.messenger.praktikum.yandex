@@ -21,7 +21,7 @@ export default class ProfileController {
     toggleSpinner(actionElem);
 
     try {
-      await this.authAPI.update(false);
+      await this.authAPI.logout();
       router.go(LOGIN_PATHNAME);
       store.reset();
     } catch (e) {

@@ -67,5 +67,3 @@ export default class API {
     throw new Error('Метод не определён');
   }
 }
-
-export { API_BASE };
