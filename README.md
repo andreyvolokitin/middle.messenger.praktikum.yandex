@@ -1,4 +1,4 @@
-# Ссылка на PR: [Sprint 3](https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex/pull/4)
+# Ссылка на PR: [Sprint 4](https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex/pull/5)
 
 # Мессенджер
 
