@@ -33,6 +33,7 @@
   ],
   "homepage": "https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@andreyvolokitin/postcss-inline-svg": "5.0.1",
     "@types/chai": "4.2.21",
     "@types/jsdom": "16.2.13",
     "@types/mocha": "9.0.0",
@@ -62,7 +63,6 @@
     "nodemon": "2.0.12",
     "postcss": "8.3.0",
     "postcss-em-media-query": "4.1.0",
-    "postcss-inline-svg": "github:wkillerud/postcss-inline-svg#2d87670d7118b980595aab38fab7661eee7401f5",
     "postcss-loader": "6.1.1",
     "prettier": "2.3.1",
     "regenerator-runtime": "0.13.9",
@@ -92,9 +92,9 @@
     "node": ">=12.13.0"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "4.17.1",
     "handlebars": "4.7.7",
-    "helmet": "^4.6.0",
+    "helmet": "4.6.0",
     "html5-boilerplate": "8.0.0",
     "nanoid": "3.1.23"
   }

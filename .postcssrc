@@ -1,6 +1,6 @@
 {
   plugins: {
-    'postcss-inline-svg': {
+    '@andreyvolokitin/postcss-inline-svg': {
       paths: ['./static/'],
     },
     'postcss-em-media-query': {},
