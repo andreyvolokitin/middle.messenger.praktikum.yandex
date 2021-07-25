@@ -77,6 +77,7 @@ module.exports = ({ mode = 'production', presets = [] } = {}) =>
       plugins: [
         new HtmlWebpackPlugin({
           template: '../static/index.html',
+          publicPath: '/',
         }),
       ],
     },
