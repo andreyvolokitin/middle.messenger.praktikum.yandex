@@ -1,4 +1,4 @@
-import Handlebars from '@andreyvolokitin/handlebars.js';
+import Handlebars from 'handlebars';
 
 import './helpers/comparison/default';
 import './helpers/comparison/is';

@@ -8,14 +8,10 @@ describe('HTTP', function () {
   const http = new HTTP(endpoint);
 
   it('should have correct "ok" property value', async () => {
-    const { ok: ok300 } = await http.get('/status/300');
     const { ok: ok400 } = await http.get('/status/400');
-    const { ok: ok500 } = await http.get('/status/500');
     const { ok: ok200 } = await http.get('/status/200');
 
-    expect(ok300).to.equal(false);
     expect(ok400).to.equal(false);
-    expect(ok500).to.equal(false);
     expect(ok200).to.equal(true);
   });
 

@@ -1,4 +1,4 @@
-import Handlebars from '@andreyvolokitin/handlebars.js';
+import Handlebars from 'handlebars';
 
 import EventBus from '../../utils/EventBus';
 import PartialsVisitor from './utils/PartialsVisitor';
