@@ -17,11 +17,6 @@
     "lint": "concurrently \"npm run lint:css\" \"npm run lint:js\"",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all lint"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex.git"
@@ -59,7 +54,6 @@
     "eslint-plugin-prettier": "3.4.0",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "5.3.2",
-    "husky": "7.0.1",
     "jsdom": "16.6.0",
     "mini-css-extract-plugin": "2.1.0",
     "mocha": "9.0.2",
@@ -91,7 +85,8 @@
     "webpack-dev-server": "4.0.0-rc.0",
     "webpack-manifest-plugin": "3.1.1",
     "webpack-merge": "5.8.0",
-    "webpack-remove-empty-scripts": "0.7.1"
+    "webpack-remove-empty-scripts": "0.7.1",
+    "husky": "^7.0.0"
   },
   "engines": {
     "node": ">=12.13.0"
