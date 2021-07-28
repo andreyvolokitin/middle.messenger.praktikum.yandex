@@ -2,17 +2,16 @@
 
 # Мессенджер
 
-Учебный проект Яндекс.Практикума: приложение "Мессенджер". [Смотреть на Netlify](https://keen-northcutt-57a9f4.netlify.app).
+Учебный проект Яндекс.Практикума: приложение "Мессенджер". Смотреть на [Netlify](https://keen-northcutt-57a9f4.netlify.app) или [Heroku](https://immense-scrubland-27655.herokuapp.com).
 
 ## Установка
 
-Для работы необходим [Node.js >=12.0.0](https://nodejs.org/en/), установленный на вашем компьютере. А также [git](https://git-scm.com/downloads) (не забудьте добавить его в `PATH`).
+Для работы необходим [Node.js >=12.13.0](https://nodejs.org/en/), установленный на вашем компьютере. А также [git](https://git-scm.com/downloads) (не забудьте добавить его в `PATH`).
 
 Скачайте репозиторий и установите зависимости, запустив `npm i` в корне репозитория. Доступные команды: 
 - `npm run start` — старт проекта в дев-режиме (локальный сервер и авто-сборка при изменениях в коде),
 - `npm run build` — сборка для production,
-- `npm run express` — старт локлаьного express-сервера,
-- `npm run watch` — запуск parcel в watch-режиме.
+- `npm run test` — запуск тестов
 
 ## Инструментарий
 
@@ -28,6 +27,10 @@
 - [stylelint](https://stylelint.io/) ([stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)), 
 - [Prettier](https://prettier.io/), 
 - [EditorConfig](https://editorconfig.org/)
+
+Сборка:
+
+[webpack](https://webpack.js.org/)
 
 ## Зависимости
 

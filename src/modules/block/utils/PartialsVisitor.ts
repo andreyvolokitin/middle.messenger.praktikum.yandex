@@ -1,4 +1,4 @@
-import Handlebars from '@andreyvolokitin/handlebars.js';
+import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
 import getObjectValue from '../../../utils/getObjectValue';
