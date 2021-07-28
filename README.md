@@ -1,5 +1,3 @@
-# Ссылка на PR: [Sprint 4](https://github.com/andreyvolokitin/middle.messenger.praktikum.yandex/pull/5)
-
 # Мессенджер
 
 Учебный проект Яндекс.Практикума: приложение "Мессенджер". Смотреть на [Netlify](https://keen-northcutt-57a9f4.netlify.app) или [Heroku](https://immense-scrubland-27655.herokuapp.com).
